@@ -41,14 +41,89 @@
 
 									<span class="image main"><img src="../images/robot_playing_piano.jpg" alt="Robot playing piano" /></span>
 
-									<p>Music is an expression of emotion, shared with its listeners through skilled usage of instruments, both internal and external to the body. Music can also be defined as a sequence of frequencies through time. Computers tend to prefer this second definition.</p>
-									<p>Algorithmic composition is the usage of algorithms to generate music. Note that it is easy to create an algorithm that generates music. Consider the following algorithm:
+									<p>
+										Music is an expression of emotion, shared with its listeners through skilled usage of instruments, both internal and external to the body. Music can also be defined as a sequence of frequencies through time. Computers tend to prefer this second definition.
+									</p>
+									<p>
+										Algorithmic composition is the usage of algorithms to generate music. Consider the following algorithm:
 										<ol type = "1">
 											<li>Sample \(n\) integers from a discrete uniform distribution on the interval \([0, 11]\)</li>
-											<li>Map each integer to each frequency in <a href="https://en.wikipedia.org/wiki/C_(musical_note)#Middle_C">Middle C</a>, so \(0\) maps to \(261.6265\ Hz\), \(1\) maps to \(277.1826\ Hz\) <a href="https://en.wikipedia.org/wiki/Piano_key_frequencies#List">etc.</a></li>
+											<li>Map each integer to each frequency in the <a href="https://en.wikipedia.org/wiki/12_equal_temperament">twelve-tone equal temperament scale</a> with a base of <a href="https://en.wikipedia.org/wiki/C_(musical_note)#Middle_C">Middle C</a>, so \(0\) maps to \(261.6265\ Hz\), \(1\) maps to \(277.1826\ Hz\), <a href="https://en.wikipedia.org/wiki/Piano_key_frequencies#List">etc.</a></li>
 											<li>Generate a sound file which consists of the \(n\) frequencies played consecutively for \(0.5\) seconds each</li>
 										</ol>
-										This algorithm is non-deterministic, so can be repeatedly executed to produce novel music! Nonetheless, this algorithm sucks, because its output will tend to sound terrible to humans. Fortunately, what sounds good to humans is described by music theory. So, we should be able to greatly improve the algorithm by incorporating some music theoretic ideas.
+										This algorithm is non-deterministic, so can be repeatedly executed to produce novel music! Nonetheless, this algorithm sucks, because its output will tend to sound terrible to humans. Fortunately, music theory offers great tools for describing a structure that sounds good to humans. So, we should be able to greatly improve the algorithm by incorporating some music theoretic ideas.
+									</p>
+									<p>
+										The <a href="https://hal.inria.fr/hal-01257155/document">paper of focus</a> defines the following architecture for musical composition:<br><br>
+										<img class="image" src="../images/composition_sequence_and_related_models.png" alt="Composition sequence and related models" width="100%"/><br><br>
+										Each component nicely maps to a computable task. Thus, the collective computable tasks form an algorithm for composition. Although all three models are vital for the production of a pleasing piece, I find the <i>Progression Generator</i> to be by far the most interesting. Consequently, I will dive deep into the <i>Progression Generator</i>, and provide brief commentary and analysis on the <i>Rhythms Generator</i> and <i>Notes Assigner</i>.
+									</p>
+									<hr class="major" />
+									<p>
+										Let us begin by defining and discussing some musical terms:
+										<ul>
+											<li>A <a href="https://en.wikipedia.org/wiki/Musical_tone"><i>tone</i></a> is a steady periodic sound, and is characterized by its duration, pitch (or frequency), intensity (or loudness), and timbre (or quality)
+											<li>A <i>phrase</i> is a sequence of related tones</li>
+											<li>A <i>chord</i> is a set of multiple tones sounding simultaneously</li>
+											<li>A <i>chord progression</i> is a sequence of chords</li>
+											<li>A <i>scale</i> is a sequence of successive tones within a one-octave range [The Complete Idiot’s Guide to Music Theory, pg 27]</li>
+											<li>An <a href="https://en.wikipedia.org/wiki/Octave"><i>octave</i></a> is the interval between one musical tone and another with double its frequency.</li>
+											<li><a href="https://en.wikipedia.org/wiki/Tonality"><i>Tonality</i></a> is the arrangement of tones and/or chords in a hierarchy of perceived relations.</li>
+											<ul>
+												<li>The perceived relations can be best understood with tones and with respect to a specific scale.</li>
+												<li>
+													For example, the <i>C major scale</i> consists of <i>C, D, E, F, G, A, B,</i> a subset of seven of the <a href="https://en.wikipedia.org/wiki/12_equal_temperament">twelve-equal temperament</a> tones <br><br>
+													<img class="image" src="../images/c_major_scale_and_degree_names.png" alt="C major scale represented with music notation and degree names" width="100%"/><br><br>
+													<audio controls style="margin: auto; display: block;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major scale. Your browser does not support the audio element.</audio><br>
+													(The seven notes are played in ascending order with respect to frequency, the <i>C</i> one octave higher than the base <i>C</i> is played, then the notes are played in descending order)<br><br>
+												</li>
+												<li>
+													Seven tones per octave make up every scale. The first tone in every scale is called the Tonic, the second the Supertonic, <a href="https://en.wikipedia.org/wiki/Degree_(music)#Scale_degree_names">etc.</a> These names describe the perceived relations between the tones. Numbering these tones relative to the Tonic makes them <a href="https://en.wikipedia.org/wiki/Degree_(music)"><i>degrees</i></a>.
+												</li>
+											</ul>
+										</ul>
+									</p>
+									<p>
+										The <i>Progression Generator</i> generates a chord progression. “The cornerstone of harmony is the progression underneath the musical content, this is the main structure and foundation of the song. It can be represented by a string of sequential chords over time. Each chord is a degree used in the tonality of the musical phrase” [source https://hal.inria.fr/hal-01257155/document, page 7]. The authors define an intriguing generative model for chord progressions: a stochastic context-free grammar, also known as a <a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">probabilistic context-free grammar (PCFG)</a>.
+									</p>
+									<p>
+										Loosely, a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar (CFG)</a> is a set of rules and symbols that defines a language. Formally, a CFG is a \(4\)-tuple \(G = (V, \Sigma, R, S)\), where:
+										<ol>
+											<li>\(V\) is a finite set; each element \(v \in V\) is a <i>non-terminal character</i> or <i>variable</i></li>
+											<li>\(\Sigma\) is a finite set of <i>terminal</i>s, disjoint from \(V\), and is the alphabet of the language defined by the grammar \(G\)</li>
+											<li>\(R\) is a finite <a href="https://en.wikipedia.org/wiki/Binary_relation">relation</a> in \( V \times (V \cup \Sigma )^{*}\), where the asterisk represents the <a href="https://en.wikipedia.org/wiki/Kleene_star">Kleene star</a> operation. The members of \(R\) are the <i>production rule</i>s of the grammar</li>
+											<li>\(S\)</span> is the start <i>variable</i> used to represent the whole sentence. \(S \in V\)</li>
+										</ol>
+										Production rules in can be denoted by:
+										<div style="text-align: center">\(A \rightarrow E\)</div>
+										where \(A \in V,\;E \in V \cup \Sigma\)
+									</p>
+									<p>
+										Loosely, a PCFG is a CFG with probabilities attached to each rule. Formally, a PCFG is a \(5\)-tuple \(G = (V, \Sigma, R, S, P)\), where:
+										<ol>
+											<li>\(V, \Sigma, R\) and \(S\) are defined above</li>
+											<li>\(P\) is a function mapping the set \(R\) to the set \([0, 1]\), such that:
+												<div style="text-align: center">\(\sum\limits_{E \in X}{A \rightarrow E = 1},\;\forall A \in V \)</div>
+												where \(X = V \cup \Sigma\)</li>
+										</ol>
+										Production rules in can be denoted by:
+										<div style="text-align: center">\(A \rightarrow E\qquad[p_i]\)</div>
+										where \(A \in V,\;E \in V \cup \Sigma,\;p_i \in P\)
+									</p>
+									<p>
+										The paper provides a nice example of a PCFG:
+										<ul>
+											<li>\(V = \{S, C\}\)</li>
+											<li>\(\Sigma = \{\)heads, tails\(\}\)</li>
+											<li>\(R, P = \{\)
+												<ul style="list-style-type: none">
+													<li>\(S \rightarrow C C\qquad\quad\,[1.0],\)</li>
+													<li>\(C \rightarrow heads\qquad[0.5],\)</li>
+													<li>\(C \rightarrow tails\qquad\;\;[0.5],\)</li>
+												\(\}\)</ul>
+											</li>
+										</ul>
+										Note that by generating a string with this PCFG, one simulates two fair coin tosses.
 									</p>
 
 									<hr class="major" />
