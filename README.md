@@ -1,4 +1,11 @@
-## Original Template and License
+# omerbaddour.github.io
+
+## Tools to Generate Content
+
+- [MacDown](https://macdown.uranusjr.com/): Markdown to HTML
+- [HTML Cleaner](https://html-cleaner.com/): Dirty HTML to clean HTML
+
+## Original Website Template and License
 
 [Editorial](https://html5up.net/editorial) hosted on [HTML5 UP](https://html5up.net/) by [@ajlkn](https://twitter.com/ajlkn)
 
