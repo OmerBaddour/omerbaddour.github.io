@@ -41,166 +41,228 @@
 
 									<span class="image main"><img src="../images/robot_playing_piano.jpg" alt="Robot playing piano" /></span>
 
-									<p>
-										Music is an expression of emotion, shared with its listeners through skilled usage of instruments, both internal and external to the body. Music can also be defined as a sequence of frequencies through time. Computers tend to prefer this second definition.
-									</p>
-									<p>
-										Algorithmic composition is the usage of algorithms to generate music. Consider the following algorithm:
-										<ol>
-											<li>Sample \(n\) integers from a discrete uniform distribution on the interval \([0, 11]\)</li>
-											<li>Map each integer to each frequency in the <a href="https://en.wikipedia.org/wiki/12_equal_temperament">twelve-tone equal temperament scale</a> with a base of <a href="https://en.wikipedia.org/wiki/C_(musical_note)#Middle_C">Middle C</a>, so \(0\) maps to \(261.6265\ Hz\), \(1\) maps to \(277.1826\ Hz\), <a href="https://en.wikipedia.org/wiki/Piano_key_frequencies#List">etc.</a></li>
-											<li>Generate a sound file which consists of the \(n\) frequencies played consecutively for \(0.5\) seconds each</li>
-										</ol>
-										This algorithm is non-deterministic, so can be repeatedly executed to produce novel music! Nonetheless, this algorithm sucks, because its output will tend to sound terrible to humans. Fortunately, music theory offers great tools for describing a structure that sounds good to humans. So, we should be able to greatly improve the algorithm by incorporating some music theoretic ideas.
-									</p>
-									<p>
-										The <a href="https://hal.inria.fr/hal-01257155/document">paper of focus</a> defines the following architecture for musical composition:<br><br>
-										<img class="image" src="../images/composition_sequence_and_related_models.png" alt="Composition sequence and related models" width="100%"/><br><br>
-										Each model nicely maps to a computable task. Thus, the collective computable tasks form an algorithm for composition. Although all three models are vital for the production of a pleasing piece, I find the <i>Progression Generator</i> to be by far the most interesting. Consequently, I will dive deep into the <i>Progression Generator</i>, and provide brief commentary and analysis on the <i>Rhythms Generator</i> and <i>Notes Assigner</i>.
-									</p>
+									<!-- TODO: add Table of Contents -->
 									<hr class="major" />
-									<p>
-										Let us begin by defining and discussing some musical terms:
-										<ul>
-											<li>A <a href="https://en.wikipedia.org/wiki/Musical_tone"><i>tone</i></a> is a steady periodic sound, and is characterized by its duration, pitch (or frequency), intensity (or loudness), and timbre (or quality)
-											<li>A <a href="https://en.wikipedia.org/wiki/Phrase_(music)"><i>phrase</i></a> is a sequence of related tones</li>
-											<li>A <a href="https://en.wikipedia.org/wiki/Chord_(music)"><i>chord</i></a> is a set of multiple tones sounding simultaneously</li>
-											<li>A <a href="https://en.wikipedia.org/wiki/Chord_progression"><i>chord progression</i></a> is a sequence of chords</li>
-											<li>A <a href="https://en.wikipedia.org/wiki/Scale_(music)"><i>scale</i></a> is a sequence of successive tones within a one-octave range [The Complete Idiot’s Guide to Music Theory, pg 27]</li>
-											<li>An <a href="https://en.wikipedia.org/wiki/Octave"><i>octave</i></a> is the interval between one musical tone and another with double its frequency</li>
-											<li><a href="https://en.wikipedia.org/wiki/Tonality"><i>Tonality</i></a> is the arrangement of tones and/or chords in a hierarchy of perceived relations</li>
-											<ul style="margin-bottom: 0">
-												<li>The perceived relations can be best understood with tones and with respect to a specific scale</li>
-												<li>
-													For example, the <i>C major scale</i> consists of <i>C, D, E, F, G, A, B,</i> a subset of seven of the <a href="https://en.wikipedia.org/wiki/12_equal_temperament">twelve-equal temperament</a> tones <br><br>
-													<img class="image" src="../images/c_major_scale_and_degree_names.png" alt="C major scale represented with music notation and degree names" width="100%"/><br><br>
-													<audio controls style="margin: auto; display: block;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major scale. Your browser does not support the audio element.</audio><br>
-													(The seven notes are played in ascending order with respect to frequency, the <i>C</i> one octave higher than the base <i>C</i> is played, then the notes are played in descending order)<br><br>
-												</li>
-												<li>
-													Seven tones per octave make up every scale. The first tone in every scale is called the tonic, the second the supertonic, <a href="https://en.wikipedia.org/wiki/Degree_(music)#Scale_degree_names">etc.</a> These names describe the perceived relations between the tones. Numbering these tones relative to the tonic makes them <a href="https://en.wikipedia.org/wiki/Degree_(music)"><i>degrees</i></a>
+									<h2>Introduction</h2>
+										<p>
+											Music is an expression of emotion, shared with its listeners through skilled usage of instruments, both internal and external to the body. Music can also be defined as a sequence of frequencies through time. Computers tend to prefer this second definition.
+										</p>
+										<p>
+											Algorithmic composition is the usage of algorithms to generate music. Consider the following algorithm:
+											<ol>
+												<li>Sample \(n\) integers from a discrete uniform distribution on the interval \([0, 11]\)</li>
+												<li>Map each integer to each frequency in the <a href="https://en.wikipedia.org/wiki/12_equal_temperament">twelve-tone equal temperament scale</a> with a base of <a href="https://en.wikipedia.org/wiki/C_(musical_note)#Middle_C">Middle C</a>, so \(0\) maps to \(261.6265\ Hz\), \(1\) maps to \(277.1826\ Hz\), <a href="https://en.wikipedia.org/wiki/Piano_key_frequencies#List">etc.</a></li>
+												<li>Generate a sound file which consists of the \(n\) frequencies played consecutively for \(0.5\) seconds each</li>
+											</ol>
+											This algorithm is non-deterministic, so can be repeatedly executed to produce novel music! Nonetheless, this algorithm sucks, because its output will tend to sound terrible to humans. Fortunately, music theory offers great tools for describing a structure that sounds good to humans. So, we should be able to greatly improve the algorithm by incorporating some music theoretic ideas.
+										</p>
+										<p>
+											The <a href="https://hal.inria.fr/hal-01257155/document">paper</a> underlying this blog post defines the following architecture for musical composition:<br><br>
+											<img class="image" src="../images/composition_sequence_and_related_models.png" alt="Composition sequence and related models" width="100%"/><br><br>
+											Each model nicely maps to a computable task. Thus, the collective computable tasks form an algorithm for composition. Although all three models are vital for the production of a pleasing piece, I find the <i>Progression Generator</i> to be by far the most interesting. Consequently, I will dive deep into the <i>Progression Generator</i>, and provide brief commentary and analysis on the <i>Rhythms Generator</i> and <i>Notes Assigner</i>.
+										</p>
+									<hr class="major" />
+									<h2>Musical Terminology</h2>
+										<p>
+											Let us begin by defining and discussing some musical terms:
+											<ul>
+												<li>A <a href="https://en.wikipedia.org/wiki/Musical_tone"><i>tone</i></a> is a steady periodic sound, and is characterized by its duration, pitch (or frequency), intensity (or loudness), and timbre (or quality)
+												<li>A <a href="https://en.wikipedia.org/wiki/Phrase_(music)"><i>phrase</i></a> is a sequence of related tones</li>
+												<li>A <a href="https://en.wikipedia.org/wiki/Chord_(music)"><i>chord</i></a> is a set of multiple tones sounding simultaneously</li>
+												<li>A <a href="https://en.wikipedia.org/wiki/Chord_progression"><i>chord progression</i></a> is a sequence of chords</li>
+												<li>A <a href="https://en.wikipedia.org/wiki/Scale_(music)"><i>scale</i></a> is a sequence of successive tones within a one-octave range</li>
+												<li>An <a href="https://en.wikipedia.org/wiki/Octave"><i>octave</i></a> is the interval between one musical tone and another with double its frequency</li>
+												<li><a href="https://en.wikipedia.org/wiki/Tonality"><i>Tonality</i></a> is the arrangement of tones and/or chords in a hierarchy of perceived relations</li>
+												<ul style="margin-bottom: 0">
+													<li>The perceived relations can be best understood with tones and with respect to a specific scale</li>
+													<li>
+														For example, the <i>C major scale</i> consists of <i>C, D, E, F, G, A, B,</i> a subset of seven of the twelve-equal temperament tones:<br><br>
+														<img class="image" src="../images/c_major_scale_and_degree_names.png" alt="C major scale represented with music notation and degree names" width="100%"/><br><br>
+														<audio controls style="margin: auto; display: block;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major scale. Your browser does not support the audio element.</audio><br>
+														(The seven notes are played in ascending order with respect to frequency, the <i>C</i> one octave higher than the base <i>C</i> is played, then the notes are played in descending order)<br><br>
+													</li>
+													<li>
+														Seven tones per octave make up every scale. The first tone in every scale is called the tonic, the second the supertonic, <a href="https://en.wikipedia.org/wiki/Degree_(music)#Scale_degree_names">etc.</a> These names describe the perceived relations between the tones. Numbering these tones relative to the tonic makes them <a href="https://en.wikipedia.org/wiki/Degree_(music)"><i>degrees</i></a>. Note that this numbering also applies to chords:<br><br>
+														<img class="image" src="../images/c_major_chord_progression_with_degree_names.png" alt="C major chord progression represented with music notation and degree names" width="100%"/><br><br>
+														<!-- TODO: insert correct audio --><audio controls style="margin: auto; display: block;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major chord progression. Your browser does not support the audio element.</audio><br>
+														The chord progression can be denoted by \(I-IV-V-I\)<br><br>
+													</li>
+												</ul>
+												<li><a href="https://en.wikipedia.org/wiki/Modulation_(music)"><i>Modulation</i></a> is the process of changing from one tonality to another (i.e. moving tonics from <i>C</i> to <i>G</i>)</li>
+												<li>An <a href="https://en.wikipedia.org/wiki/Anacrusis"><i>anacrusis</i></a> is a note or sequence of notes which preceeds the first beat of a musical phrase</li>
+											</ul>
+										</p>
+									<hr class="major" />
+									<h2>Context-Free Grammars and Probabilistic Context-Free Grammars</h2>
+										<p>
+											The <i>Progression Generator</i> generates a chord progression. “The cornerstone of harmony is the progression underneath the musical content, this is the main structure and foundation of the song. It can be represented by a string of sequential chords over time. Each chord is a degree used in the tonality of the musical phrase” [source https://hal.inria.fr/hal-01257155/document, page 7]. The authors define an intriguing generative model for chord progressions: a stochastic context-free grammar, also known as a <a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">probabilistic context-free grammar (PCFG)</a>.
+										</p>
+										<p>
+											Loosely, a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar (CFG)</a> is a set of rules and symbols that defines a language. Formally, a CFG is a \(4\)-tuple \(G = (V, \Sigma, R, S)\), where:
+											<ol>
+												<li>\(V\) is a finite set; each element \(v \in V\) is a <i>non-terminal character</i> or <i>variable</i></li>
+												<li>\(\Sigma\) is a finite set of <i>terminal</i>s, disjoint from \(V\), and is the alphabet of the language defined by the grammar \(G\)</li>
+												<li>\(R\) is a finite <a href="https://en.wikipedia.org/wiki/Binary_relation">relation</a> in \( V \times (V \cup \Sigma )^{*}\), where the asterisk represents the <a href="https://en.wikipedia.org/wiki/Kleene_star">Kleene star</a> operation. The members of \(R\) are the <i>production rule</i>s of the grammar</li>
+												<li>\(S\)</span> is the start <i>variable</i> used to represent the whole sentence. \(S \in V\)</li>
+											</ol>
+											Production rules in can be denoted by:
+											<div style="text-align: center">\(A \rightarrow E\)</div>
+											where \(A \in V,\;E \in V \cup \Sigma\)
+										</p>
+										<p>
+											Loosely, a PCFG is a CFG with probabilities attached to each rule. Formally, a PCFG is a \(5\)-tuple \(G = (V, \Sigma, R, S, P)\), where:
+											<ol>
+												<li>\(V, \Sigma, R\) and \(S\) are defined above</li>
+												<li>\(P\) is a function mapping the set \(R\) to the set \([0, 1]\), such that:
+													<div style="text-align: center">\(\sum\limits_{E \in X}{P(A \rightarrow E) = 1}\)</div>
+													\(\forall A \in V\), where \(X = V \cup \Sigma\)</li>
+											</ol>
+											Production rules in can be denoted by:
+											<div style="text-align: center">\(A \rightarrow E\qquad\qquad[p_i]\)</div>
+											where \(A \in V,\;E \in V \cup \Sigma,\;p_i = P(A \rightarrow E)\)
+										</p>
+										<p>
+											The paper provides a nice example of a PCFG:
+											<ul>
+												<li>\(V = \{S, C\}\)</li>
+												<li>\(\Sigma = \{\)heads, tails\(\}\)</li>
+												<li>\(R, P = \{\)
+													<ul style="list-style-type: none">
+														<li>\(\qquad\qquad S \rightarrow C C\qquad\qquad\quad\,[1.0],\)</li>
+														<li>\(\qquad\qquad C \rightarrow\) heads\(\qquad\qquad\;[0.5],\)</li>
+														<li>\(\qquad\qquad C \rightarrow\) tails \(\qquad\qquad\;\;\;[0.5],\)</li>
+													\(\qquad\;\;\}\)</ul>
 												</li>
 											</ul>
-											<li><a href="https://en.wikipedia.org/wiki/Modulation_(music)"><i>Modulation</i></a> is the process of changing from one tonality to another (i.e. moving tonics from <i>C</i> to <i>G</i>)</li>
-											<li>An <a href="https://en.wikipedia.org/wiki/Anacrusis"><i>anacrusis</i></a> is a note or sequence of notes which preceeds the first beat of a musical phrase</li>
-										</ul>
-									</p>
-									<p>
-										The <i>Progression Generator</i> generates a chord progression. “The cornerstone of harmony is the progression underneath the musical content, this is the main structure and foundation of the song. It can be represented by a string of sequential chords over time. Each chord is a degree used in the tonality of the musical phrase” [source https://hal.inria.fr/hal-01257155/document, page 7]. The authors define an intriguing generative model for chord progressions: a stochastic context-free grammar, also known as a <a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">probabilistic context-free grammar (PCFG)</a>.
-									</p>
-									<p>
-										Loosely, a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar (CFG)</a> is a set of rules and symbols that defines a language. Formally, a CFG is a \(4\)-tuple \(G = (V, \Sigma, R, S)\), where:
-										<ol>
-											<li>\(V\) is a finite set; each element \(v \in V\) is a <i>non-terminal character</i> or <i>variable</i></li>
-											<li>\(\Sigma\) is a finite set of <i>terminal</i>s, disjoint from \(V\), and is the alphabet of the language defined by the grammar \(G\)</li>
-											<li>\(R\) is a finite <a href="https://en.wikipedia.org/wiki/Binary_relation">relation</a> in \( V \times (V \cup \Sigma )^{*}\), where the asterisk represents the <a href="https://en.wikipedia.org/wiki/Kleene_star">Kleene star</a> operation. The members of \(R\) are the <i>production rule</i>s of the grammar</li>
-											<li>\(S\)</span> is the start <i>variable</i> used to represent the whole sentence. \(S \in V\)</li>
-										</ol>
-										Production rules in can be denoted by:
-										<div style="text-align: center">\(A \rightarrow E\)</div>
-										where \(A \in V,\;E \in V \cup \Sigma\)
-									</p>
-									<p>
-										Loosely, a PCFG is a CFG with probabilities attached to each rule. Formally, a PCFG is a \(5\)-tuple \(G = (V, \Sigma, R, S, P)\), where:
-										<ol>
-											<li>\(V, \Sigma, R\) and \(S\) are defined above</li>
-											<li>\(P\) is a function mapping the set \(R\) to the set \([0, 1]\), such that:
-												<div style="text-align: center">\(\sum\limits_{E \in X}{P(A \rightarrow E) = 1}\)</div>
-												\(\forall A \in V\), where \(X = V \cup \Sigma\)</li>
-										</ol>
-										Production rules in can be denoted by:
-										<div style="text-align: center">\(A \rightarrow E\qquad\qquad[p_i]\)</div>
-										where \(A \in V,\;E \in V \cup \Sigma,\;p_i = P(A \rightarrow E)\)
-									</p>
-									<p>
-										The paper provides a nice example of a PCFG:
-										<ul>
-											<li>\(V = \{S, C\}\)</li>
-											<li>\(\Sigma = \{\)heads, tails\(\}\)</li>
-											<li>\(R, P = \{\)
-												<ul style="list-style-type: none">
-													<li>\(\qquad\qquad S \rightarrow C C\qquad\qquad\quad\,[1.0],\)</li>
-													<li>\(\qquad\qquad C \rightarrow\) heads\(\qquad\qquad\;[0.5],\)</li>
-													<li>\(\qquad\qquad C \rightarrow\) tails \(\qquad\qquad\;\;\;[0.5],\)</li>
-												\(\qquad\;\;\}\)</ul>
-											</li>
-										</ul>
-										Note that by generating a string with this PCFG, one simulates two fair coin tosses!
-									</p>
-									<p>
-										And now, we are ready to see the PCFG provided in the paper:
-										<ul style="margin-bottom: 0">
-											<li>\(\Sigma = \{i, ii, iii, iv, v, vi, viidis, v7\}\), where each of the first seven elements \((i,\,..., viidis)\) map to each degree (tonic, supertonic, mediant, subdominant, dominant, submediant, subtonic), and \((v7)\) maps to the dominant seventh chord</li>
-											<li>Production rules and probabilities with annotations:<br><br>
-												Start:
-												<ul style="list-style-type: none">
-													<li>\(S' \rightarrow A\;S\;F\qquad\qquad\quad\,[0.3]\qquad\) # Suggestion</li>
-													<li>\(\quad\,\rightarrow S\;F\qquad\qquad\qquad\,[0.7]\)</li>
-												</ul>
-											</li>
-										</ul>
-										<ul style="list-style-type: none">
-											<li>
-												Anacrusis:
-												<ul style="list-style-type: none">
-													<li>\(A \rightarrow ana \;v\qquad\qquad\quad\;\,[0.7]\qquad\) # Anacrusis</li>
-													<li>\(\quad\,\rightarrow ana \;i\qquad\qquad\quad\;\,[0.3]\)</li>
-												</ul>
-											</li>
-											<li>
-												Phrases:
-												<ul style="list-style-type: none">
-													<li>\(S \rightarrow T\;S_1\;D\;T\;S\qquad\;\;[0.35]\qquad\) # Basic Phrases</li>
-													<li>\(\quad\,\rightarrow T\;D\;T\;S\qquad\quad\;\;[0.25]\qquad\) #</li><br>
-													<li>\(\quad\,\rightarrow T\;M\;D\;T\;S\qquad\;[0.07]\qquad\) # Arpeggios</li>
-													<li>\(\quad\,\rightarrow T\;S_1\;S_2\;T\;S\qquad\;[0.07]\qquad\) #</li><br>
-													<li>\(\quad\,\rightarrow S_1\;T\;D\;T\;S\qquad\:\,[0.07]\qquad\) # No Tonic Start</li>
-													<li>\(\quad\,\rightarrow D\;T\;S_1\;T\;S\qquad\:\,[0.07]\qquad\) #</li><br>
-													<li>\(\quad\,\rightarrow T\;S_1\;T\;S\qquad\quad\,\,\,[0.02]\qquad\) # Misc</li>
-													<li>\(\quad\,\rightarrow T\;S_1\;D\;S_2\;T\;S\quad\,[0.02]\qquad\) #</li>
-													<li>\(\quad\,\rightarrow T\;M\;S_1\;D\;T\;S\;\;\;\;[0.02]\qquad\) #</li><br>
-													<li>\(\quad\,\rightarrow MOD\qquad\qquad\;\;\,[0.06]\qquad\) # Modulation</li>
-												</ul>
-											</li>
-											<li>
-												Degree functions:
-												<ul style="list-style-type: none">
-													<li>\(T \rightarrow i\qquad\qquad\qquad\quad\;\:\,[0.8]\qquad\) # Tonic</li>
-													<li>\(\quad\,\rightarrow iii\qquad\qquad\qquad\;\;\;[0.1]\qquad\) #</li>
-													<li>\(\quad\,\rightarrow vi\qquad\qquad\qquad\quad[0.1]\qquad\) #</li><br>
-													<li>\(S_1 \rightarrow iv\qquad\qquad\qquad\;\:\:\,[0.7]\qquad\) # Subdominant</li>
-													<li>\(\quad\,\rightarrow ii\qquad\qquad\qquad\;\;\;\;[0.2]\qquad\) #</li>
-													<li>\(\quad\,\rightarrow vi\qquad\qquad\qquad\;\;\;\,[0.1]\qquad\) #</li><br>
-													<li>\(D \rightarrow v\qquad\qquad\qquad\quad\:\,[0.4]\qquad\) # Dominant</li>
-													<li>\(\quad\,\rightarrow v7\qquad\qquad\qquad\;\;\;[0.3]\qquad\) #</li>
-													<li>\(\quad\,\rightarrow viidis\qquad\qquad\quad\;[0.2]\qquad\) #</li>
-													<li>\(\quad\,\rightarrow iii\qquad\qquad\qquad\;\;\:[0.1]\qquad\) #</li><br>
-													<li>\(M \rightarrow iii\qquad\qquad\qquad\;\,\,[1.0]\qquad\) # Mediant</li><br>
-													<li>\(S_2 \rightarrow vi\qquad\qquad\qquad\;\;\;[1.0]\qquad\) # Submediant</li><br>
-												</ul>
-											</li>
-												End:
-												<ul style="list-style-type: none">
-													<li>\(F \rightarrow T\;D\;T\qquad\qquad\quad\;\,[0.7]\qquad\) # End Suggestion</li>
-													<li>\(\quad\,\rightarrow T\;S_1\;T\qquad\qquad\quad\,[0.3]\)</li>
-												</ul>
-											</li>
-										</ul>
-									</p>
-									<p>Take a moment to marvel in its glory.</p>
-									<p>
-										Some things to note:
-										<ul>
-											<li>This is not the full grammar. The full grammar is too long to fit in the paper; above is actually a subset of the grammar for major tonalities (there is actually a whole other grammar for minor tonalities)</li>
-											<li>The above is not a formal definition of the grammar; the authors did not provide one. I believe the form they provided the grammar in is more readable, and don’t believe that a formal definition would add much value, hence I decided to replicate the provided representation</li>
-											<li>The grammar reflects the harmonic basis of the genre that the authors wished to model (e.g. ending the song in the tonic degree)</li>
-											<li>The authors assigned probabilities to each rule based on a deep study of J.S. Bach pieces</li>
-										</ul>
-									</p>
+											Note that by generating a string with this PCFG, one simulates two fair coin tosses!
+										</p>
+									<hr class="major" />
+									<h2>The Progression Generator</h2>
+										<p>
+											And now, we are ready to see the PCFG for generating chord progressions:
+											<ul style="margin-bottom: 0">
+												<li>\(\Sigma = \{i, ii, iii, iv, v, vi, viidis, v7\}\), where each of the first seven elements \((i,\,..., viidis)\) map to each degree (tonic, supertonic, mediant, subdominant, dominant, submediant, subtonic), and \((v7)\) maps to the dominant seventh chord</li>
+												<li>Production rules and probabilities with annotations:<br><br>
+													Start:
+													<ul style="list-style-type: none">
+														<li>\(S' \rightarrow A\;S\;F\qquad\qquad\quad\,[0.3]\qquad\) # Suggestion</li>
+														<li>\(\quad\,\rightarrow S\;F\qquad\qquad\qquad\,[0.7]\)</li>
+													</ul>
+												</li>
+											</ul>
+											<ul style="list-style-type: none">
+												<li>
+													Anacrusis:
+													<ul style="list-style-type: none">
+														<li>\(A \rightarrow ana \;v\qquad\qquad\quad\;\,[0.7]\qquad\) # Anacrusis</li>
+														<li>\(\quad\,\rightarrow ana \;i\qquad\qquad\quad\;\,[0.3]\)</li>
+													</ul>
+												</li>
+												<li>
+													Phrases:
+													<ul style="list-style-type: none">
+														<li>\(S \rightarrow T\;S_1\;D\;T\;S\qquad\;\;[0.35]\qquad\) # Basic Phrases</li>
+														<li>\(\quad\,\rightarrow T\;D\;T\;S\qquad\quad\;\;[0.25]\qquad\) #</li><br>
+														<li>\(\quad\,\rightarrow T\;M\;D\;T\;S\qquad\;[0.07]\qquad\) # Arpeggios</li>
+														<li>\(\quad\,\rightarrow T\;S_1\;S_2\;T\;S\qquad\;[0.07]\qquad\) #</li><br>
+														<li>\(\quad\,\rightarrow S_1\;T\;D\;T\;S\qquad\:\,[0.07]\qquad\) # No Tonic Start</li>
+														<li>\(\quad\,\rightarrow D\;T\;S_1\;T\;S\qquad\:\,[0.07]\qquad\) #</li><br>
+														<li>\(\quad\,\rightarrow T\;S_1\;T\;S\qquad\quad\,\,\,[0.02]\qquad\) # Misc</li>
+														<li>\(\quad\,\rightarrow T\;S_1\;D\;S_2\;T\;S\quad\,[0.02]\qquad\) #</li>
+														<li>\(\quad\,\rightarrow T\;M\;S_1\;D\;T\;S\;\;\;\;[0.02]\qquad\) #</li><br>
+														<li>\(\quad\,\rightarrow MOD\qquad\qquad\;\;\,[0.06]\qquad\) # Modulation</li>
+													</ul>
+												</li>
+												<li>
+													Degree functions:
+													<ul style="list-style-type: none">
+														<li>\(T \rightarrow i\qquad\qquad\qquad\quad\;\:\,[0.8]\qquad\) # Tonic</li>
+														<li>\(\quad\,\rightarrow iii\qquad\qquad\qquad\;\;\;[0.1]\qquad\) #</li>
+														<li>\(\quad\,\rightarrow vi\qquad\qquad\qquad\quad[0.1]\qquad\) #</li><br>
+														<li>\(S_1 \rightarrow iv\qquad\qquad\qquad\;\:\:\,[0.7]\qquad\) # Subdominant</li>
+														<li>\(\quad\,\rightarrow ii\qquad\qquad\qquad\;\;\;\;[0.2]\qquad\) #</li>
+														<li>\(\quad\,\rightarrow vi\qquad\qquad\qquad\;\;\;\,[0.1]\qquad\) #</li><br>
+														<li>\(D \rightarrow v\qquad\qquad\qquad\quad\:\,[0.4]\qquad\) # Dominant</li>
+														<li>\(\quad\,\rightarrow v7\qquad\qquad\qquad\;\;\;[0.3]\qquad\) #</li>
+														<li>\(\quad\,\rightarrow viidis\qquad\qquad\quad\;[0.2]\qquad\) #</li>
+														<li>\(\quad\,\rightarrow iii\qquad\qquad\qquad\;\;\:[0.1]\qquad\) #</li><br>
+														<li>\(M \rightarrow iii\qquad\qquad\qquad\;\,\,[1.0]\qquad\) # Mediant</li><br>
+														<li>\(S_2 \rightarrow vi\qquad\qquad\qquad\;\;\;[1.0]\qquad\) # Submediant</li>
+													</ul>
+												</li>
+													End:
+													<ul style="list-style-type: none">
+														<li>\(F \rightarrow T\;D\;T\qquad\qquad\quad\;\,[0.7]\qquad\) # End Suggestion</li>
+														<li>\(\quad\,\rightarrow T\;S_1\;T\qquad\qquad\quad\,[0.3]\)</li>
+													</ul>
+												</li>
+											</ul>
+										</p>
+										<p>Take a moment to marvel in its glory.</p>
+										<p>
+											Some things to note:
+											<ul>
+												<li>This is not the full grammar. The full grammar is too long to fit in the paper; above is actually a subset of the grammar for major tonalities (there is actually a whole other grammar for minor tonalities)</li>
+												<li>The above is not a formal definition of the grammar; the authors did not provide one. I believe the form they provided the grammar in is more readable, and don’t believe that a formal definition would add much value, hence I decided to replicate the provided representation</li>
+												<li>The grammar reflects the harmonic basis of the genre that the authors wished to model (e.g. ending the song in the tonic degree)</li>
+												<li>The authors assigned probabilities to each rule based on a deep study of J.S. Bach pieces</li>
+											</ul>
+										</p>
+										<p>
+											To get a better understanding of the PCFG, let's take a look at a short, high-probability output:<br><br>
+											\(S' \rightarrow S\;F\)<br><br>
+											\(S \rightarrow T\;S_1\;D\;T\;S\)<br>
+											\(F \rightarrow T\;D\;T\)<br>
+											\(= T\;S_1\;D\;T\;S\;T\;D\;T\)<br><br>
+											\(T \rightarrow i, \forall T\)<br>
+											\(S_1 \rightarrow iv\)<br>
+											\(D \rightarrow v, \forall D\)<br>
+											\(S \rightarrow \epsilon\)<br>
+											\(= i\;iv\;v\;i\;i\;v\;i\)<br><br>
+											\(\epsilon\) is notation for empty string. Note that there is no rule \(S \rightarrow \epsilon\), but that such a rule is necessary for finite chord progressions.
+												
+										</p>
 
 									<hr class="major" />
-
 									<h2>Citations</h2>
+										<p><strong>Underlying paper</strong>: Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155, <a href="https://hal.inria.fr/hal-01257155/document">URL</a></p>
+										<strong>Introduction</strong>
+										<ul>
+											<li><a href="https://en.wikipedia.org/wiki/12_equal_temperament">Twelve-tone equal temperament scale</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/C_(musical_note)#Middle_C">Middle C</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Piano_key_frequencies#List">Piano key frequencies</a></li>
+											<li>Fig. 3., Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+										</ul>
+										<strong>Musical Terminology</strong>
+										<ul>
+											<li><a href="https://en.wikipedia.org/wiki/Musical_tone">Tone</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Phrase_(music)">Phrase</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Chord_(music)">Chord</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Chord_progression">Chord progression</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Scale_(music)">Scale</a></li>
+											<li>"Scales." The Complete Idiot's Guide to Music Theory, by Michael MILLER, ALPHA, 2005.</li>
+											<li><a href="https://en.wikipedia.org/wiki/Octave">Octave</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Tonality">Tonality</a></li>
+											<li>Fig. 1., Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+											<li>Fig. 2., Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+											<li><a href="https://en.wikipedia.org/wiki/Degree_(music)#Scale_degree_names">Degree names</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Degree_(music)">Degree</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Modulation_(music)">Modulation</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Anacrusis">Anacrusis</a></li>
+										</ul>
+										<strong>Context-Free Grammars and Probabilistic Context-Free Grammars</strong>
+										<ul>
+											<li>pp. 6, Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+											<li><a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">Probabilistic context-free grammar</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-free grammar</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Binary_relation">Relation</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Kleene_star">Kleene star</a></li>
+											<li>pp. 5, Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+										</ul>
+										<strong>The Progression Generator</strong>
+										<ul>
+											<li>pp. 6-7, Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+										</ul>
 
 								</section>
 
