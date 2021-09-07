@@ -2,8 +2,9 @@
 
 ## Tools to Generate Content
 
-- [MacDown](https://macdown.uranusjr.com/): Markdown to HTML
-- [HTML Cleaner](https://html-cleaner.com/): Dirty HTML to clean HTML
+- [MacDown](https://macdown.uranusjr.com/): Markdown to dirty, unformatted HTML
+- [HTML Cleaner](https://html-cleaner.com/): dirty, unformatted HTML to clean, unformatted HTML
+- [HTML Formatter](https://www.freeformatter.com/html-formatter.html): clean, unformatted HTML to clean, formatted HTML
 
 ## Original Website Template and License
 
