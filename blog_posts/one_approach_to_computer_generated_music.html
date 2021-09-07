@@ -58,7 +58,7 @@
 										</p>
 										<p>
 											The <a href="https://hal.inria.fr/hal-01257155/document">paper</a> underlying this blog post defines the following architecture for musical composition:<br><br>
-											<img class="image" src="../images/composition_sequence_and_related_models.png" alt="Composition sequence and related models" width="100%"/><br><br>
+											<img class="image" src="../images/composition_sequence_and_related_models.png" alt="Composition sequence and related models" width="80%" style="display: block; margin-left: auto; margin-right: auto;"/><br><br>
 											Each model nicely maps to a computable task. Thus, the collective computable tasks form an algorithm for composition. Although all three models are vital for the production of a pleasing piece, I find the <i>Progression Generator</i> to be by far the most interesting. Consequently, I will dive deep into the <i>Progression Generator</i>, and provide brief commentary and analysis on the <i>Rhythms Generator</i> and <i>Notes Assigner</i>.
 										</p>
 									<hr class="major" />
@@ -77,25 +77,29 @@
 													<li>The perceived relations can be best understood with tones and with respect to a specific scale</li>
 													<li>
 														For example, the <i>C major scale</i> consists of <i>C, D, E, F, G, A, B,</i> a subset of seven of the twelve-equal temperament tones:<br><br>
-														<img class="image" src="../images/c_major_scale_and_degree_names.png" alt="C major scale represented with music notation and degree names" width="100%"/><br><br>
+														<img class="image" src="../images/c_major_scale_and_degree_names.png" alt="C major scale represented with music notation and degree names" width="90%" style="display: block; margin-left: auto; margin-right: auto;"/><br><br>
 														<audio controls style="margin: auto; display: block;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major scale. Your browser does not support the audio element.</audio><br>
 														(The seven notes are played in ascending order with respect to frequency, the <i>C</i> one octave higher than the base <i>C</i> is played, then the notes are played in descending order)<br><br>
 													</li>
 													<li>
 														Seven tones per octave make up every scale. The first tone in every scale is called the tonic, the second the supertonic, <a href="https://en.wikipedia.org/wiki/Degree_(music)#Scale_degree_names">etc.</a> These names describe the perceived relations between the tones. Numbering these tones relative to the tonic makes them <a href="https://en.wikipedia.org/wiki/Degree_(music)"><i>degrees</i></a>. Note that this numbering also applies to chords:<br><br>
-														<img class="image" src="../images/c_major_chord_progression_with_degree_names.png" alt="C major chord progression represented with music notation and degree names" width="100%"/><br><br>
+														<img class="image" src="../images/c_major_chord_progression_with_degree_names.png" alt="C major chord progression represented with music notation and degree names" width="60%" style="display: block; margin-left: auto; margin-right: auto;"/><br><br>
 														<!-- TODO: insert correct audio --><audio controls style="margin: auto; display: block;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major chord progression. Your browser does not support the audio element.</audio><br>
-														The chord progression can be denoted by \(I-IV-V-I\)<br><br>
+														The chord progression can be denoted by <i>I-IV-V-I</i><br><br>
 													</li>
 												</ul>
 												<li><a href="https://en.wikipedia.org/wiki/Modulation_(music)"><i>Modulation</i></a> is the process of changing from one tonality to another (i.e. moving tonics from <i>C</i> to <i>G</i>)</li>
 												<li>An <a href="https://en.wikipedia.org/wiki/Anacrusis"><i>anacrusis</i></a> is a note or sequence of notes which preceeds the first beat of a musical phrase</li>
+												<li>A <a href="https://en.wikipedia.org/wiki/Beat_(music)"><i>beat</i></a> is a punctuating sound</li>
+												<li><a href="https://en.wikipedia.org/wiki/Tempo"><i>Tempo</i></a> is a pace, denoted in beats per minute</li>
+												<li>A <a href="https://en.wikipedia.org/wiki/Bar_(music)"><i>bar</i></a> or <a href="https://en.wikipedia.org/wiki/Bar_(music)"><i>measure</i></a> is a segment of time corresponding to a specific number of beats played at a specific tempo</li>
+												<li><a href="https://en.wikipedia.org/wiki/Time_signature"><i>Time signature</i></a> specifies the number of beats in a bar</li>
 											</ul>
 										</p>
 									<hr class="major" />
 									<h2>Context-Free Grammars and Probabilistic Context-Free Grammars</h2>
 										<p>
-											The <i>Progression Generator</i> generates a chord progression. “The cornerstone of harmony is the progression underneath the musical content, this is the main structure and foundation of the song. It can be represented by a string of sequential chords over time. Each chord is a degree used in the tonality of the musical phrase” [source https://hal.inria.fr/hal-01257155/document, page 7]. The authors define an intriguing generative model for chord progressions: a stochastic context-free grammar, also known as a <a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">probabilistic context-free grammar (PCFG)</a>.
+											The <i>Progression Generator</i> generates a chord progression. “The cornerstone of harmony is the progression underneath the musical content, this is the main structure and foundation of the song. It can be represented by a string of sequential chords over time. Each chord is a degree used in the tonality of the musical phrase”. The authors define an intriguing generative model for chord progressions: a stochastic context-free grammar, also known as a <a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">probabilistic context-free grammar (PCFG)</a>.
 										</p>
 										<p>
 											Loosely, a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar (CFG)</a> is a set of rules and symbols that defines a language. Formally, a CFG is a \(4\)-tuple \(G = (V, \Sigma, R, S)\), where:
@@ -219,10 +223,75 @@
 											\(D \rightarrow v, \forall D\)<br>
 											\(S \rightarrow \epsilon\)<br>
 											\(= i\;iv\;v\;i\;i\;v\;i\)<br><br>
-											\(\epsilon\) is notation for empty string. Note that there is no rule \(S \rightarrow \epsilon\), but that such a rule is necessary for finite chord progressions.
-												
+											= <i>I-IV-V-I-I-V-I</i><br><br>
+											\(\epsilon\) is notation for empty string. Note that there is no production rule \(S \rightarrow \epsilon\) present in the above grammar; length is handled separately. The production rule serves as a convenient hack to generate the above chord progression.
 										</p>
-
+										<p>
+											Here's what the chord progression sounds like:<br><br>
+											<!-- TODO: insert correct audio --><audio controls style="margin: auto; display: block;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major chord progression. Your browser does not support the audio element.</audio><br><br>
+											Here is another nice chord progression, generatable by the PCFG with a relatively high probability, and its audio:<br><br>
+											\[i\;iv\;v\;i\;iii\;vii\;vi\;iii\;v\;i\;\]
+											<div style="text-align: center">= <i>I-IV-V-I-III-VII-VI-III-V-I</i></div><br>
+											<!-- TODO: insert correct audio --><audio controls style="margin: auto; display: block;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major chord progression. Your browser does not support the audio element.</audio><br>
+										</p>
+										<p>Although the grammar produces nice chord progressions, there are some notable limitations.</p>
+										<p>
+											CFGs cannot describe the structure of some languages. For example, CFGs cannot capture languages that exhibit <a href="https://en.wikipedia.org/wiki/Cross-serial_dependencies">cross-serial dependencies</a>:<br><br>
+											<img class="image" src="../images/cross-serial_dependency.png" alt="Cross-serial dependencies" width="60%" style="display: block; margin-left: auto; margin-right: auto;"/><br><br>
+											The language of strings of the form:
+											\[a^mb^nc^md^n\]
+											has cross-serial dependencies, hence it is non-context free.<br><br>
+											The language:
+											\[a^mb^na^mb^n\]
+											also is not context free. Imagine that \(a\) and \(b\) are chord progressions. This pretty interleaving of chord progressions cannot be described by a CFG, and thus cannot be generated by a PCFG.
+										</p>
+										<p>The probability of each rule in a PCFG is fixed upon definition. This means that there is no way to augment the probability distribution of rules when certain rules are applied during the generation of a string. It would be nice to be able to do this, since it could allow for biasing of the probability distribution such that repeated structures or patterns have a high chance of occurring throughout the chord progression. This could make for a cool extension of PCFGs: "aware" or "self-modifying" PCFGs.</p>
+										<p>Instead of defining an "aware" PCFG, it is easier to use already-existing, more powerful structures. <a href="https://en.wikipedia.org/wiki/Context-sensitive_grammar">Context-sensitive grammars</a> (CSGs) are an extension of CFGs that allow for a mixture of terminal and non-terminal symbols on both the left- and right-hand side of each production rule. <a href="https://en.wikipedia.org/wiki/Unrestricted_grammar">Unrestricted grammars</a> are an extension of CSGs that allow for any production rules that have non-empty left-hand sides. Unrestricted grammars counter the two problems described in the previous paragraphs, since they are equivalent to <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machines</a>, which is to say any computer algorithm. We can certainly define algorithms that generate languages containing cross-serial dependencies, and define algorithms for augmenting the probability of each rule in a PCFG upon rule application.</p>
+									<hr class="major" />
+									<h2>The Rhythms Generator</h2>
+										<p>The <i>Rhythms Generator</i> generates a rhythm for the piece. It receives as input the tempo and time signature of the piece, and outputs durations for each note and chord.</p>
+										<p>The authors of the paper define three categories for each measure in a piece:</p>
+										<ul>
+											<li><i>Normal measures</i>: Bars from within the progression with no radical meaning other than advancing the piece</li>
+											<li><i>Special measures</i>: Pivotal bars or with special meaning</li>
+											<li><i>Final measures</i>: Final bars of phrases or the whole theme</li>
+										</ul>
+										<p>Loosely, the duration of each note and chord is determined by sampling from the probability distribution for the encapsulating measure's category (normal, special or final). To provide cohesion between measures, a decision tree is sampled from, determining how rhythm should (or should not) change from measure to measure.</p>
+									<hr class="major" />
+									<h2>The Notes Assigner</h2>
+										<p>The <i>Notes Assigner</i> assigns notes to form the melody. The first note of each measure is selected to match the base of the first chord for that measure. The remaining notes are determined relative to the previous note, according to a probability distribution:</p>
+										<p><img class="image" src="../images/notes_assigner_probability_distribution.png" alt="Composition sequence and related models" width="45%" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+										<p>An interesting observation is that the distribution has bias towards the third and fifth intervals, since these notes make a basic chord with the base (previous) note, avoiding dissonance, making everything sound pleasant. For example, with a current note and chord of <i>C</i> and <i>C major</i>, there is a high chance of the following note being <i>E</i> or <i>G</i>, mirroring the <i>C-E-G</i> notes of the <i>C major</i> chord.</p>	
+									<hr class="major" />
+									<h2>A Piece Generated By The Models</h2>
+										<p>With initial parameters:</p>
+										<ul>
+											<li>Tonality: <i>G major</i></li>
+											<li>BPM: 110</li>
+											<li>Measure: \(\genfrac{}{}{0pt}{}{4}{4}\) (binary)</li>
+											<li>Length: Approx. 25 bars</li>
+										</ul>
+										<p>The following piece was generated:</p>
+										<p><img class="image" src="../images/sugerencia_sheet_music.png" alt="Composition sequence and related models" width="65%" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+										<p><!-- TODO: insert correct audio --><audio controls style="margin: auto; display: block;" src="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major chord progression. Your browser does not support the audio element.</audio></p>
+										<p>The authors provide some analysis of the piece:</p>
+										<p>"The song's initial tonality is <i>G major</i> modulating to its relative minor <i>(G minor)</i> at measure \(6\) and keeping this tonality until finishing. Harmonically the song is marking the progression <i>I-VI-I</i> and the progression <i>I-III-I</i> with an intersection containing the common progression <i>I-II-V7-I</i> and finally finishing in the tonic degree <i>(G minor)</i>.</p>
+										<p>Melodically the song is overall simple having upward intervals to make a tension or climax at various points (measures \(3, 8, 10, 13, 16, 21\)) and then with downward intervals to relieve the ear of this. It is to note that the climax at bar \(16\) coincides with the chord <i>V7</i> (this chord has a bit of dissonance).</p>
+										<p>Rhythmically there were two basic rhythms generated for the bass and the melody line, the reader may see that the trivial rhythm for the base (just one whole note) has a more complex counterpart in the melody each time it is played. The other two rhythms are fairly normal that make way to the following more complex rhythm. Also the global rhythm is far from chaotic."</p>
+									<hr class="major" />
+									<h2>Final Remarks</h2>
+										<p>I was ecstatic when first discovering the paper underlying this blog post, because after learning that one can create <a href="http://www.cs.uccs.edu/%7Ejkalita/work/cs589/2010/12Grammars.pdf">CFGs that describe the main structures of the English language</a> [page 6], I was curious to further explore the expressive power of CFGs. Eventually, I had the idea of applying it to the language of music, which prompted my discovery of the paper.</p>
+										<p>Nonetheless, I am disappointed by the paper's general lack of rigour and completeness when describing and showcasing each model. Furthermore, the link provided on page 11 to see other generated pieces and play around with a beta version of the assistant is broken.</p>
+										<p>For me, this paper provides some great preliminary analytical tools and models for describing Bach's compositions, and music theory in general, in terms of computation. It would be cool to push these ideas and models further, perhaps using more sophisticated tools (i.e. probabilistic CSGs and probabilistic unrestricted grammars), and even trying to integrate the disjoint models together, to provide more cohesion among the different components of the generated pieces.</p>
+									<hr class="major" />
+									<h2>Notes</h2>
+										<strong>The Rhythms Generator</strong>
+										<ul>
+											<li>I am unsure how measures are classified</li>
+											<li>I am unsure how the <i>Rhythms Generator</i> differs for the melody and the chord progression</li>
+											<li>I am unsure why there is a duration of \(1.5\), since I believe it is standard in Western music to only use durations that are <a href="https://en.wikipedia.org/wiki/Note_value#List">a power of two of the length of each bar</a>. A duration of \(1.5\) is possible with dot notation, though this complexity seems beyond the simple model</li>
+											<li>I am unsure how the proposed probabilities fulfill the probability rules. Perhaps the authors truncated the full table for the sake of brevity, explaining why the column's values do not sum to 1?</li>
+										</ul>
 									<hr class="major" />
 									<h2>Citations</h2>
 										<p><strong>Underlying paper</strong>: Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155, <a href="https://hal.inria.fr/hal-01257155/document">URL</a></p>
@@ -244,16 +313,25 @@
 											<li><a href="https://en.wikipedia.org/wiki/Octave">Octave</a></li>
 											<li><a href="https://en.wikipedia.org/wiki/Tonality">Tonality</a></li>
 											<li>Fig. 1., Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
-											<li>Fig. 2., Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+											<li><a href="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major scale audio</a></li>
 											<li><a href="https://en.wikipedia.org/wiki/Degree_(music)#Scale_degree_names">Degree names</a></li>
 											<li><a href="https://en.wikipedia.org/wiki/Degree_(music)">Degree</a></li>
+											<li>Fig. 2., Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+											<!-- TODO: correct link --><li><a href="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major scale audio</a></li>
 											<li><a href="https://en.wikipedia.org/wiki/Modulation_(music)">Modulation</a></li>
 											<li><a href="https://en.wikipedia.org/wiki/Anacrusis">Anacrusis</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Beat_(music)">Beat URL 1</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Pulse_(music)">Beat URL 2</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Tempo">Tempo</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Bar_(music)">Bar URL 1</a></li>
+											<li><a href="https://www.masterclass.com/articles/learn-about-measures-in-music#what-is-a-measure-in-music">Bar URL 2</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Time_signature">Time signature</a></li>
 										</ul>
 										<strong>Context-Free Grammars and Probabilistic Context-Free Grammars</strong>
 										<ul>
 											<li>pp. 6, Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
-											<li><a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">Probabilistic context-free grammar</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Probabilistic_context-free_grammar">Probabilistic context-free grammar URL 1</a></li>
+											<li><a href="http://www.cs.columbia.edu/%7Emcollins/courses/nlp2011/notes/pcfgs.pdf">Probabilistic context-free grammar URL 2</a></li>
 											<li><a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-free grammar</a></li>
 											<li><a href="https://en.wikipedia.org/wiki/Binary_relation">Relation</a></li>
 											<li><a href="https://en.wikipedia.org/wiki/Kleene_star">Kleene star</a></li>
@@ -262,6 +340,34 @@
 										<strong>The Progression Generator</strong>
 										<ul>
 											<li>pp. 6-7, Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+											<!-- TODO: correct link --><li><a href="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major scale audio</a></li>
+											<!-- TODO: correct link --><li><a href="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major scale audio</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Cross-serial_dependencies">Cross-serial dependencies</a></li>
+											<li><a href="https://commons.wikimedia.org/w/index.php?curid=28274222">Image of cross-serial dependencies</a>: By Christian Nassif-Haynes - Own work, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Context-sensitive_grammar">Context-sensitive grammars</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Unrestricted_grammar">Unrestricted grammars</a></li>
+											<li><a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machines</a></li>
+										</ul>
+										<strong>The Rhythms Generator</strong>
+										<ul>
+											<li>pp. 7-9, Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+										</ul>
+										<strong>The Notes Assigner</strong>
+										<ul>
+											<li>pp. 9, Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+										</ul>
+										<strong>A Piece Generated By The Models</strong>
+										<ul>
+											<li>pp. 10-11, Salim Perchy, Gerardo Sarria. Musical Composition with Stochastic Context-Free Grammars. 8th Mexican International Conference on Artificial Intelligence (MICAI 009), Nov 2009, Guanajuato, Mexico. ffhal-01257155</li>
+											<!-- TODO: correct link --><li><a href="https://upload.wikimedia.org/wikipedia/commons/7/72/C_major.ogg">C major scale audio</a></li>
+										</ul>
+										<strong>Final Remarks</strong>
+										<ul>
+											<li><a href="http://www.cs.uccs.edu/%7Ejkalita/work/cs589/2010/12Grammars.pdf">Context-free grammars for English</a></li>
+										</ul>
+										<strong>Notes</strong>
+										<ul>
+											<li><a href="https://en.wikipedia.org/wiki/Note_value#List">Duration of notes</a></li>
 										</ul>
 
 								</section>
