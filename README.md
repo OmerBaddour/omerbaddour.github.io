@@ -35,8 +35,3 @@ Credits:
 - Other:
 	- [jQuery](https://jquery.com/)
 	- [Responsive Tools](https://github.com/ajlkn/responsive-tools)
-
-## Pictures and Credits
-
-- One Approach to Computer Generated Music
-	- Photo of [robot playing piano](https://github.com/OmerBaddour/omerbaddour.github.io/blob/master/images/robot_playing_piano.jpg) credit to [Possessed Photography](https://unsplash.com/@possessedphotography?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) hosted by [Unsplash](https://unsplash.com/s/photos/robot-music?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText). Free for personal and commercial use under [their license](https://unsplash.com/license)
