@@ -6,7 +6,7 @@
 - [HTML Cleaner](https://html-cleaner.com/): dirty, unformatted HTML to clean, unformatted HTML
 - [HTML Formatter](https://www.freeformatter.com/html-formatter.html): clean, unformatted HTML to clean, formatted HTML
 - Free media
-	- [Wikipedia Commons](https://commons.wikimedia.org/wiki/Main_Page)
+	- [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page)
 	- [Unsplash](https://unsplash.com/)
 
 ## Original Website Template and License
