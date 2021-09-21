@@ -8,6 +8,7 @@
 - Free media
 	- [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page)
 	- [Unsplash](https://unsplash.com/)
+	- [Favicon](http://onlinefavicon.com/)
 
 ## Original Website Template and License
 
