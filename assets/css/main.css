@@ -2241,6 +2241,7 @@ button,
         color: #9fa3a6;
         content: '\f078';
         position: absolute;
+        top: 12px;
         right: 0; }
       #menu ul a.opener:hover:before, #menu ul span.opener:hover:before {
         color: #f56a6a; }
