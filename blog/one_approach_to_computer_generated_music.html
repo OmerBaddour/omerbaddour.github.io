@@ -16,16 +16,6 @@
 		<link rel="icon" href="/images/favicon.ico">
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" />
-		<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-		<script>
-		$(function () {  /* include other HTML files */
-			var includes = $('[data-include]')
-			$.each(includes, function () {
-				var file = $(this).data('include') + '.html'
-				$(this).load(file)
-			})
-		})
-		</script>
 	</head>
 	<body class="is-preload">
 
@@ -409,6 +399,14 @@
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
 			<script id="MathJax-script" async="false" src="/assets/mathjax/tex-chtml.js"></script>
-
+			<script>
+			$(function () {  /* include other HTML files */
+				var includes = $('[data-include]')
+				$.each(includes, function () {
+					var file = $(this).data('include') + '.html'
+					$(this).load(file)
+				})
+			})
+			</script>
 	</body>
 </html>
