@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Projects Home</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div data-include="/components/header"></div>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Projects Home</h1>
+									</header>
+
+									<span class="image main"><img src="/images/construction_workers.jpg" alt="Construction workers" /></span>
+
+									<hr class="major" />
+									<h2>About</h2>
+									<p>This is where I store information about projects I have done and am working on. These projects are organized into software and non-software projects. Software projects can relate to work or school, as well as projects I have worked on for fun, with friends or independently. Non-software projects tend to be indepenent work.</p>
+									<p>I use the word project pretty loosly. The featured projects vary from working software applications to hobbies like reading and chess.</p>
+									<p>The projects pages aim to communicate big-picture ideas, the details, show-off project highlights, and communicate lessons I learned along the way.</p>
+									<p>Check out my software projects <a href="/projects/software.html">here</a>, and my non-software projects <a href="/projects/non_software.html">here</a>. These can also be accessed from this website's menu (icon in top-left).</p>
+
+									<hr class="major" />
+									<h2>Sources</h2>
+									<p><strong>Main image</strong>: By <a href="https://unsplash.com/@jramos10">Josue Isai Ramos Figueroa</a>, hosted by <a href="https://unsplash.com/photos/qvBYnMuNJ9A">Unsplash</a>, <a href="https://unsplash.com/license">license</a></p>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<div data-include="/components/sidebar"></div>
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+			<script id="MathJax-script" async="false" src="/assets/mathjax/tex-chtml.js"></script>
+			<script>
+				$(function () {  /* include other HTML files */
+					var includes = $('[data-include]')
+					$.each(includes, function () {
+						var file = $(this).data('include') + '.html'
+						$(this).load(file)
+					})
+				})
+			</script>
+	</body>
+</html>
