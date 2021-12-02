@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Non-Software Projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div data-include="/components/header"></div>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Non-Software Projects</h1>
+									</header>
+
+									<span class="image main"><img src="/images/scattered_lego.jpg" alt="Scattered LEGO pieces" /></span>
+									
+									<hr class="major" />
+                                    <h2>Pinned Non-Software Projects</h2>
+                                        <div class="posts">
+                                            <article>
+                                                <a href="/projects/non_software/chess.html" class="image"><img src="/images/chess.jpg" alt="Chess board and pieces" /></a>
+                                                <h3><a href="/projects/non_software/chess.html">Chess</a></h3>
+                                                <p>A showcasing of games I'm proud of, puzzles I find interesting, etc.</p>
+                                            </article>
+                                            <article>
+                                                <a href="/projects/non_software/reading.html" class="image"><img src="/images/reading_on_floor.jpg" alt="" /></a>
+												<!-- https://unsplash.com/photos/H_ZkCEyH01s -->
+                                                <h3><a href="/projects/non_software/reading.html">Reading</a></h3> <!-- TODO: fix link -->
+                                                <p>Thoughts and notes on books and textbooks I've read. Also features a list of books and textbooks I've read, am reading, and want to read.</p>
+                                            </article>
+                                        </div>
+                            
+                                    <hr class="major" />
+                                    <h2>All Non-Software Projects</h2>
+									<!-- TODO: sort alphabetically by title -->
+                                        <dl>
+                                            <dt><h4><a href="/projects/non_software/chess.html">Chess</a></h4></dt>
+                                            <dd>
+                                                <p>A showcasing of games I'm proud of, puzzles I find interesting, etc.</p>
+                                            </dd>
+                                        </dl>
+										<dl>
+                                            <dt><h4><a href="/projects/non_software/reading.html">Reading (coming soon)</a></h4></dt> <!-- TODO: fix link -->
+                                            <dd>
+                                                <p>Thoughts and notes on books and textbooks I've read. Also features a list of books and textbooks I've read, am reading, and want to read.</p>
+                                            </dd>
+                                        </dl>
+										
+									<hr class="major" />
+									<h2>Sources</h2>
+										<p><strong>Main image</strong>: "More Lego" by <a href="https://unsplash.com/@xavi_cabrera">Xavi Cabrera</a>, hosted by <a href="https://unsplash.com/photos/kn-UmDZQDjM">Unsplash</a>, <a href="https://unsplash.com/license">license</a></p>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<div data-include="/components/sidebar"></div>
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+			<script id="MathJax-script" async="false" src="/assets/mathjax/tex-chtml.js"></script>
+			<script>
+			$(function () {  /* include other HTML files */
+				var includes = $('[data-include]')
+				$.each(includes, function () {
+					var file = $(this).data('include') + '.html'
+					$(this).load(file)
+				})
+			})
+			</script>
+
+	</body>
+</html>
