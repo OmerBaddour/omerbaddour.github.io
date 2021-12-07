@@ -9,7 +9,7 @@
 	- [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page)
 	- [Unsplash](https://unsplash.com/)
 	- [Favicon](http://onlinefavicon.com/)
-- [Chess game embedding](http://pgn4web-board-generator.casaschi.net/board-generator.html)
+- [Chess game embedding](https://pgn4web.sourceforge.io/board-generator.html)
 
 ## Original Website Template and License
 
