@@ -10,7 +10,7 @@ iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
 code, del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var, b,
-u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+u, i, center, dl, dt, dd, fieldset,
 form, label, legend, table, caption, tbody,
 tfoot, thead, tr, th, td, article, aside,
 canvas, details, embed, figure, figcaption,
@@ -29,9 +29,6 @@ footer, header, hgroup, menu, nav, section {
 
 body {
   line-height: 1; }
-
-ol, ul {
-  list-style: none; }
 
 blockquote, q {
   quotes: none; }
@@ -1256,39 +1253,6 @@ a.image {
     -webkit-transform: scale(1.075);
     -ms-transform: scale(1.075);
     transform: scale(1.075); }
-
-/* List */
-ol {
-  list-style: decimal;
-  margin: 0 0 2em 0;
-  padding-left: 1.25em; }
-  ol li {
-    padding-left: 0.25em; }
-
-ul {
-  list-style: disc;
-  margin: 0 0 2em 0;
-  padding-left: 1em; }
-  ul li {
-    padding-left: 0.5em; }
-  ul.alt {
-    list-style: none;
-    padding-left: 0; }
-    ul.alt li {
-      border-top: solid 1px rgba(210, 215, 217, 0.75);
-      padding: 0.5em 0; }
-      ul.alt li:first-child {
-        border-top: 0;
-        padding-top: 0; }
-
-dl {
-  margin: 0 0 2em 0; }
-  dl dt {
-    display: block;
-    font-weight: 600;
-    margin: 0 0 1em 0; }
-  dl dd {
-    margin-left: 2em; }
 
 /* Actions */
 ul.actions {
