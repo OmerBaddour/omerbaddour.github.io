@@ -10,6 +10,7 @@
 	- [Unsplash](https://unsplash.com/)
 	- [Favicon](http://onlinefavicon.com/)
 - [Chess game embedding](https://pgn4web.sourceforge.io/board-generator.html)
+- [Google Docs to Markdown](https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607)
 
 ## Original Website Template and License
 
