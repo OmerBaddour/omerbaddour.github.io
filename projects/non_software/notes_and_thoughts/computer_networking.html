@@ -196,9 +196,8 @@
                                                                 </ul>
                                                         </ul>
                                                 </ul>
-                                        <li><a href="#sources">Sources</a></li>
-                                       
-                                    </ul>
+                                            <li><a href="#sources">Sources</a></li>
+                                        </ul>
 
                                     <hr class="major" />
                                     <h2 id="overall-thoughts">Overall Thoughts</h2>
@@ -653,67 +652,67 @@
                                             </ul>
                                             <br>
                                     <h3 id="2-application-layer">Chapter 2 — Application Layer</h3>
-                                            <h4 id="2.1-principles-of-network-applications">2.1 — Principles of Network Applications</h4>
+                                        <h4 id="2.1-principles-of-network-applications">2.1 — Principles of Network Applications</h4>
                                             <ul>
-                                                    <li id="2.1.1-network-application-architectures"><strong>2.1.1 Network Application Architectures</strong></li>
+                                                <li id="2.1.1-network-application-architectures"><strong>2.1.1 Network Application Architectures</strong></li>
                                                     <ul>
                                                         <li>Application architecture dictates how the application is structured over various end systems</li>
-                                                            <li>Client-server architecture</li>
-                                                            <li><img class="image" src="/images/computer_networking/2_1_client_server_architecture.png" alt="Client-server architecture" width="40%"/></li>
+                                                        <li>Client-server architecture</li>
+                                                        <li><img class="image" src="/images/computer_networking/2_1_client_server_architecture.png" alt="Client-server architecture" width="40%"/></li>
                                                             <ul>
-                                                                    <li>Server</li>
+                                                                <li>Server</li>
                                                                     <ul>
                                                                         <li>Always-on host</li>
                                                                         <li>Fixed, well-known IP address</li>
                                                                     </ul>
-                                                                    <li>Client</li>
+                                                                <li>Client</li>
                                                                     <ul>
                                                                         <li>Issues requests</li>
                                                                     </ul>
                                                                 <li>Clients communicate indirectly via a server</li>
                                                                 <li>Data centers are used to create a powerful virtual server, to better deal with all of the client requests</li>
                                                             </ul>
-                                                            <li>Peer-to-Peer (P2P)</li>
-                                                            <li><img class="image" src="/images/computer_networking/2_1_peer_to_peer_architecture.png" alt="Peer-to-peer architecture" width="40%"/></li>
+                                                        <li>Peer-to-Peer (P2P)</li>
+                                                        <li><img class="image" src="/images/computer_networking/2_1_peer_to_peer_architecture.png" alt="Peer-to-peer architecture" width="40%"/></li>
                                                             <ul>
                                                                 <li>Minimal (or no) reliance on dedicated servers in data centers</li>
                                                                 <li>Direct communication between pairs of intermittently connected hosts (peers)</li>
-                                                                    <li>Self-scalability</li>
+                                                                <li>Self-scalability</li>
                                                                     <ul>
                                                                         <li>Peers generate workload by requesting files, but also add service capacity to the system by distributing files to other peers</li>
                                                                     </ul>
-                                                                    <li>Disadvantages due to highly decentralized structure</li>
+                                                                <li>Disadvantages due to highly decentralized structure</li>
                                                                     <ul>
                                                                         <li>Security</li>
                                                                         <li>Performance</li>
                                                                         <li>Reliability</li>
                                                                     </ul>
                                                             </ul>
-                                                            <li>Hybrids of client-server and P2P</li>
+                                                        <li>Hybrids of client-server and P2P</li>
                                                             <ul>
                                                                 <li>For example, many instant messaging applications use servers to track the IP addresses of users, but user-to-user messages are sent directly between hosts</li>
                                                             </ul>
                                                     </ul>
-                                                    <li id="2.1.2-processes-communicating"><strong>2.1.2 Processes Communicating</strong></li>
+                                                <li id="2.1.2-processes-communicating"><strong>2.1.2 Processes Communicating</strong></li>
                                                     <ul>
-                                                            <li>Process — program running within an end system by rules governed by the system's operating system</li>
+                                                        <li>Process — program running within an end system by rules governed by the system's operating system</li>
                                                             <ul>
                                                                 <li>Want process communication which works independently from the end systems' operating systems</li>
                                                             </ul>
                                                         <li>Processes exchange messages</li>
-                                                            <li>Broadly, in each communication session between a pair of processes, there is always a client and server process</li>
+                                                        <li>Broadly, in each communication session between a pair of processes, there is always a client and server process</li>
                                                             <ul>
                                                                 <li>Client process initiates communication, and downloads from a network</li>
                                                                 <li>Server process waits to be contacted, and uploads to a network</li>
                                                             </ul>
-                                                            <li>Socket: software interface which allows a process to send and receive messages from a network</li>
+                                                        <li>Socket: software interface which allows a process to send and receive messages from a network</li>
                                                             <ul>
                                                                 <li>Application Programming Interface (API) between the application and the network</li>
                                                             </ul>
-                                                            <li>Application developer's control on the transport-layer</li>
+                                                        <li>Application developer's control on the transport-layer</li>
                                                             <ul>
                                                                 <li>Choice of transport protocol</li>
-                                                                    <li>Ability to configure transport-layer parameters</li>
+                                                                <li>Ability to configure transport-layer parameters</li>
                                                                     <ul>
                                                                         <li>Maximum buffer size</li>
                                                                         <li>Maximum segment size</li>
@@ -722,35 +721,35 @@
                                                         <li>Host is identified by IP address</li>
                                                         <li>Process is identified by port number</li>
                                                     </ul>
-                                                    <li id="2.1.3-transport-services-available-to-applications"><strong>2.1.3 Transport Services Available to Applications</strong></li>
+                                                <li id="2.1.3-transport-services-available-to-applications"><strong>2.1.3 Transport Services Available to Applications</strong></li>
                                                     <ul>
-                                                            <li>Reliable data transfer</li>
+                                                        <li>Reliable data transfer</li>
                                                             <ul>
                                                                 <li>Sending process can pass its data into the socket and know with complete confidence that the data will (eventually) arrive without errors (likely) at the receiving process</li>
                                                                 <li>Not necessary for loss-tolerant applications</li>
                                                             </ul>
-                                                            <li>Throughput</li>
+                                                        <li>Throughput</li>
                                                             <ul>
                                                                 <li>Guarantees are great for bandwidth-sensitive applications</li>
                                                                 <li>Not necessary for elastic applications</li>
                                                             </ul>
-                                                            <li>Timing</li>
+                                                        <li>Timing</li>
                                                             <ul>
                                                                 <li>Guarantees are great for interactive real-time applications</li>
                                                                 <li>Not necessary for non-real-time applications</li>
                                                             </ul>
-                                                            <li>Security</li>
+                                                        <li>Security</li>
                                                             <ul>
                                                                 <li>Confidentiality</li>
                                                                 <li>Data integrity</li>
                                                                 <li>End-point authentication</li>
                                                             </ul>
                                                     </ul>
-                                                    <li id="2.1.4-transport-services-provided-by-the-internet"><strong>2.1.4 Transport Services Provided by the Internet</strong></li>
-                                                        <ul>
-                                                            <li>TCP</li>
+                                                <li id="2.1.4-transport-services-provided-by-the-internet"><strong>2.1.4 Transport Services Provided by the Internet</strong></li>
+                                                    <ul>
+                                                        <li>TCP</li>
                                                             <ul>
-                                                                    <li>Connection-oriented service</li>
+                                                                <li>Connection-oriented service</li>
                                                                     <ul>
                                                                         <li>Client and server exchange transport-layer control information with each other before the application-level messages begin to flow (handshaking)</li>
                                                                         <li>Full-duplex TCP connection forms between the sockets of the two processes</li>
@@ -758,227 +757,228 @@
                                                                 <li>Reliable data transfer service</li>
                                                                 <li>Congestion-control mechanism</li>
                                                             </ul>
-                                                            <li>UDP</li>
+                                                        <li>UDP</li>
                                                             <ul>
                                                                 <li>Connectionless service</li>
                                                                 <li>Unreliable data transfer service</li>
                                                                 <li>No congestion-control mechanism</li>
                                                             </ul>
-                                                            <li>Security</li>
+                                                        <li>Security</li>
                                                             <ul>
                                                                 <li>Provided by neither TCP or UDP</li>
-                                                                    <li>Secure Sockets Layer (SSL) enhancement for TCP providing confidentiality, data integrity, end-point authentication</li>
+                                                                <li>Secure Sockets Layer (SSL) enhancement for TCP providing confidentiality, data integrity, end-point authentication</li>
                                                                     <ul>
-                                                                            <li>Implemented in the application layer</li>
-                                                                            <li><img class="image" src="/images/computer_networking/2_1_applications_and_protocols.png" alt="Popular Internet applications, their application-layer protocols, and their underlying transport protocols" width="40%"/></li>
+                                                                        <li>Implemented in the application layer</li>
+                                                                        <li><img class="image" src="/images/computer_networking/2_1_applications_and_protocols.png" alt="Popular Internet applications, their application-layer protocols, and their underlying transport protocols" width="40%"/></li>
                                                                     </ul>
                                                             </ul>
-                                                        </ul>
-                                                    <li id="2.1.5-application-layer-protocols"><strong>2.1.5 Application-Layer Protocols</strong></li>
-                                                        <ul>
-                                                            <li>Define</li>
+                                                    </ul>
+                                                <li id="2.1.5-application-layer-protocols"><strong>2.1.5 Application-Layer Protocols</strong></li>
+                                                    <ul>
+                                                        <li>Define</li>
                                                             <ul>
                                                                 <li>The types of messages exchanged between application processes</li>
                                                                 <li>The syntax of various message types (fields and delineation between fields)</li>
                                                                 <li>Semantics of the fields</li>
                                                                 <li>Rules for determining when and how processes send and respond to messages</li>
                                                             </ul>
-                                                        </ul>
-                                                    <li id="2.1.6-network-applications-covered-in-this-book"><strong>2.1.6 Network Applications Covered in This Book</strong></li>
-                                                        <ul>
-                                                            <li>The Web</li>
-                                                            <li>Electronic mail</li>
-                                                            <li>Directory services</li>
-                                                            <li>Video streaming</li>
-                                                            <li>P2P applications</li>
-                                                        </ul>
+                                                    </ul>
+                                                <li id="2.1.6-network-applications-covered-in-this-book"><strong>2.1.6 Network Applications Covered in This Book</strong></li>
+                                                    <ul>
+                                                        <li>The Web</li>
+                                                        <li>Electronic mail</li>
+                                                        <li>Directory services</li>
+                                                        <li>Video streaming</li>
+                                                        <li>P2P applications</li>
+                                                    </ul>
                                             </ul>
                                             <br>
-                                            <h4 id="2.2-the-web-and-hypertext-transfer-protocol-http">2.2 — The Web and HyperText Transfer Protocol (HTTP)</h4>
-                                                <ul>
-                                                    <li id="2.2.1-overview-of-http"><strong>2.2.1 Overview of HTTP</strong></li>
-                                                    <li><img class="image" src="/images/computer_networking/2_2_overview_of_http.png" alt="Overview of HTTP" width="40%"/></li>
-                                                        <ul>
-                                                            <li>Web's application-layer protocol</li>
-                                                            <li>Implemented in client and server programs</li>
-                                                            <li>Web page</li>
-                                                                <ul>
-                                                                    <li>Consists of objects (files)</li>
-                                                                    <li>Base HTML file with referenced objects</li>
-                                                                    <li>Each object is addressable by a Universal Resource Locator (URL)</li>
-                                                                </ul>
-                                                            <li>Uses TCP</li>
-                                                            <li>Client-server application architecture</li>
-                                                            <li>Stateless</li>
-                                                                <ul>
-                                                                    <li>Maintains no information about the clients</li>
-                                                                </ul>
-                                                            <li>Persistent connection by default</li>
-                                                        </ul>
-                                                    <li id="2.2.2-non-persistent-and-persistent-connections"><strong>2.2.2 Non-Persistent and Persistent Connections</strong></li>
-                                                        <ul>
-                                                            <li>Non-Persistent: each request/response pair is sent over a separate TCP connection</li>
-                                                            <li>Persistent: each request/response pair is sent over the same TCP connection</li>
-                                                                <li>Round-trip time (RTT) — time for a small packet to travel from client to server and then back to the client</li>
-                                                                <li><img class="image" src="/images/computer_networking/2_2_rtt.png" alt="RTT" width="40%"/></li>
-                                                                <ul>
-                                                                        <li>Persistent connections avoid the extraneous</li>
-                                                                        <ul>
-                                                                            <li>Two RTTs per TCP handshake and object request</li>
-                                                                            <li>Allocation of TCP buffers and variables</li>
-                                                                            <li>Delay when not using pipelining (HTTP/2)</li>
-                                                                        </ul>
-                                                                </ul>
-                                                        </ul>
-                                                            <li id="2.2.3-http-message-format"><strong>2.2.3 HTTP Message Format</strong></li>
+                                        <h4 id="2.2-the-web-and-hypertext-transfer-protocol-http">2.2 — The Web and HyperText Transfer Protocol (HTTP)</h4>
+                                            <ul>
+                                                <li id="2.2.1-overview-of-http"><strong>2.2.1 Overview of HTTP</strong></li>
+                                                <li><img class="image" src="/images/computer_networking/2_2_overview_of_http.png" alt="Overview of HTTP" width="40%"/></li>
+                                                    <ul>
+                                                        <li>Web's application-layer protocol</li>
+                                                        <li>Implemented in client and server programs</li>
+                                                        <li>Web page</li>
                                                             <ul>
-                                                                <li>ASCII</li>
-                                                                <li>Request</li>
-                                                                    <li><img class="image" src="/images/computer_networking/2_2_http_request_message.png" alt="General format of an HTTP request message" width="40%"/></li>
+                                                                <li>Consists of objects (files)</li>
+                                                                <li>Base HTML file with referenced objects</li>
+                                                                <li>Each object is addressable by a Universal Resource Locator (URL)</li>
+                                                            </ul>
+                                                        <li>Uses TCP</li>
+                                                        <li>Client-server application architecture</li>
+                                                        <li>Stateless</li>
+                                                            <ul>
+                                                                <li>Maintains no information about the clients</li>
+                                                            </ul>
+                                                        <li>Persistent connection by default</li>
+                                                    </ul>
+                                                <li id="2.2.2-non-persistent-and-persistent-connections"><strong>2.2.2 Non-Persistent and Persistent Connections</strong></li>
+                                                    <ul>
+                                                        <li>Non-Persistent: each request/response pair is sent over a separate TCP connection</li>
+                                                        <li>Persistent: each request/response pair is sent over the same TCP connection</li>
+                                                            <li>Round-trip time (RTT) — time for a small packet to travel from client to server and then back to the client</li>
+                                                            <li><img class="image" src="/images/computer_networking/2_2_rtt.png" alt="RTT" width="40%"/></li>
+                                                            <ul>
+                                                                    <li>Persistent connections avoid the extraneous</li>
                                                                     <ul>
-                                                                            <li>Methods</li>
-                                                                            <ul>
-                                                                                <li>GET</li>
-                                                                                <li>POST</li>
-                                                                                <li>HEAD</li>
-                                                                                <li>PUT</li>
-                                                                                <li>DELETE</li>
-                                                                            </ul>
-                                                                            <li>Browser generates header lines as a function of</li>
-                                                                            <ul>
-                                                                                <li>The browser type and version</li>
-                                                                                <li>User configuration of the browser</li>
-                                                                                <li>Whether the browser currently has a cached, but possibly out-of-date version of the object</li>
-                                                                            </ul>
-                                                                    </ul>
-                                                                    <li>Response</li>
-                                                                    <li><img class="image" src="/images/computer_networking/2_2_http_response_message.png" alt="General format of an HTTP response message" width="40%"/></li>
-                                                                    <ul>
-                                                                            <li>Web servers generate headers in a similar way to browsers</li>
-                                                                            <ul>
-                                                                                <li>Different products, versions, configurations</li>
-                                                                            </ul>
+                                                                        <li>Two RTTs per TCP handshake and object request</li>
+                                                                        <li>Allocation of TCP buffers and variables</li>
+                                                                        <li>Delay when not using pipelining (HTTP/2)</li>
                                                                     </ul>
                                                             </ul>
-                                                            <li id="2.2.4-user-server-interaction:-cookies"><strong>2.2.4 User-Server Interaction: Cookies</strong></li>
+                                                    </ul>
+                                                <li id="2.2.3-http-message-format"><strong>2.2.3 HTTP Message Format</strong></li>
+                                                    <ul>
+                                                        <li>ASCII</li>
+                                                        <li>Request</li>
+                                                        <li><img class="image" src="/images/computer_networking/2_2_http_request_message.png" alt="General format of an HTTP request message" width="40%"/></li>
                                                             <ul>
-                                                                    <li>An HTTP server is stateless</li>
+                                                                <li>Methods</li>
                                                                     <ul>
-                                                                        <li>Simplifies server design</li>
-                                                                        <li>However, often desirable to identify users</li>
+                                                                        <li>GET</li>
+                                                                        <li>POST</li>
+                                                                        <li>HEAD</li>
+                                                                        <li>PUT</li>
+                                                                        <li>DELETE</li>
                                                                     </ul>
-                                                                    <li>Cookies</li>
-                                                                    <li><img class="image" src="/images/computer_networking/2_2_cookies.png" alt="Keeping user state with cookies" width="40%"/></li>
+                                                                <li>Browser generates header lines as a function of</li>
+                                                                    <ul>
+                                                                        <li>The browser type and version</li>
+                                                                        <li>User configuration of the browser</li>
+                                                                        <li>Whether the browser currently has a cached, but possibly out-of-date version of the object</li>
+                                                                    </ul>
                                                             </ul>
-                                                            <li id="2.2.5-web-caching"><strong>2.2.5 Web Caching</strong></li>
-                                                            <li><img class="image" src="/images/computer_networking/2_2_web_caching.png" alt="Clients requesting objects through a Web cache" width="40%"/></li>
+                                                        <li>Response</li>
+                                                        <li><img class="image" src="/images/computer_networking/2_2_http_response_message.png" alt="General format of an HTTP response message" width="40%"/></li>
                                                             <ul>
-                                                                <li>Functions as both a server and a client</li>
-                                                                    <li>Typically purchased and installed by an ISP</li>
+                                                                <li>Web servers generate headers in a similar way to browsers</li>
                                                                     <ul>
-                                                                        <li>Relatively cheap — public-domain software that runs on inexpensive PCs</li>
+                                                                        <li>Different products, versions, configurations</li>
                                                                     </ul>
-                                                                    <li>Can substantially reduce the</li>
-                                                                    <ul>
-                                                                        <li>Response time for a client request</li>
-                                                                        <li>Traffic on an institution's access link to the Internet</li>
-                                                                        <li>Web traffic in the Internet as a whole</li>
-                                                                    </ul>
-                                                                <li>Want to maximize cache hit rates</li>
-                                                                <li>Content Distribution Networks (CDNs) install many distributed caches throughout the Internet, localizing much of the traffic</li>
-                                                                    <li>A cache can verify that its objects are up to date using conditional GET messages</li>
-                                                                    <ul>
-                                                                        <li>GET method</li>
-                                                                        <li>If-Modified-Since header</li>
-                                                                    </ul>
+                                                            </ul>
+                                                    </ul>
+                                                <li id="2.2.4-user-server-interaction:-cookies"><strong>2.2.4 User-Server Interaction: Cookies</strong></li>
+                                                    <ul>
+                                                        <li>An HTTP server is stateless</li>
+                                                            <ul>
+                                                                <li>Simplifies server design</li>
+                                                                <li>However, often desirable to identify users</li>
+                                                            </ul>
+                                                        <li>Cookies</li>
+                                                        <li><img class="image" src="/images/computer_networking/2_2_cookies.png" alt="Keeping user state with cookies" width="40%"/></li>
+                                                    </ul>
+                                                <li id="2.2.5-web-caching"><strong>2.2.5 Web Caching</strong></li>
+                                                <li><img class="image" src="/images/computer_networking/2_2_web_caching.png" alt="Clients requesting objects through a Web cache" width="40%"/></li>
+                                                    <ul>
+                                                        <li>Functions as both a server and a client</li>
+                                                        <li>Typically purchased and installed by an ISP</li>
+                                                            <ul>
+                                                                <li>Relatively cheap — public-domain software that runs on inexpensive PCs</li>
+                                                            </ul>
+                                                        <li>Can substantially reduce the</li>
+                                                            <ul>
+                                                                <li>Response time for a client request</li>
+                                                                <li>Traffic on an institution's access link to the Internet</li>
+                                                                <li>Web traffic in the Internet as a whole</li>
+                                                            </ul>
+                                                        <li>Want to maximize cache hit rates</li>
+                                                        <li>Content Distribution Networks (CDNs) install many distributed caches throughout the Internet, localizing much of the traffic</li>
+                                                        <li>A cache can verify that its objects are up to date using conditional GET messages</li>
+                                                            <ul>
+                                                                <li>GET method</li>
+                                                                <li>If-Modified-Since header</li>
                                                             </ul>
                                                     </ul>
                                             </ul>
                                             <br>
-                                            <h4 id="2.3-electronic-mail-in-the-internet">2.3 — Electronic Mail in the Internet</h4>
-                                            <li><img class="image" src="/images/computer_networking/2_3_email.png" alt="Alice sends a message to Bob" width="40%"/></li>
+                                        <h4 id="2.3-electronic-mail-in-the-internet">2.3 — Electronic Mail in the Internet</h4>
+                                            <ul>
+                                                <li><img class="image" src="/images/computer_networking/2_3_email.png" alt="Alice sends a message to Bob" width="40%"/></li>
                                                 <li>User agent — allow users to</li>
+                                                    <ul>
+                                                        <li>Read</li>
+                                                        <li>Reply to</li>
+                                                        <li>Forward</li>
+                                                        <li>Save</li>
+                                                        <li>Compose messages</li>
+                                                    </ul>
+                                                    <li>Mail server</li>
+                                                    <ul>
+                                                            <li>Each recipient has a mailbox in a mail server, which</li>
+                                                            <ul>
+                                                                <li>Manages and maintains the messages sent to the recipient</li>
+                                                            </ul>
+                                                        <li>Authenticates recipients</li>
+                                                            <li>Deals with failure</li>
+                                                            <ul>
+                                                                <li>Holds messages in a message queue and attempts (re)transmission until success</li>
+                                                            </ul>
+                                                    </ul>
+                                                <li id="2.3.1-smtp"><strong>2.3.1 SMTP</strong></li>
                                                 <ul>
-                                                    <li>Read</li>
-                                                    <li>Reply to</li>
-                                                    <li>Forward</li>
-                                                    <li>Save</li>
-                                                    <li>Compose messages</li>
+                                                    <li>Transfer messages from senders' mail servers to the recipients' mail servers</li>
+                                                    <li>Everything encoded in 7-bit ASCII (old protocol, designed before people emailed large attachments)</li>
+                                                        <li>Common commands</li>
+                                                        <ul>
+                                                            <li>HELO</li>
+                                                            <li>MAIL FROM</li>
+                                                            <li>RCPT TO</li>
+                                                            <li>DATA</li>
+                                                            <li>QUIT</li>
+                                                        </ul>
+                                                    <li>Each command followed by CRLF</li>
+                                                    <li>Terminate DATA with CRLF.CRLF</li>
                                                 </ul>
-                                                <li>Mail server</li>
+                                                <li id="2.3.2-comparison-with-http"><strong>2.3.2 Comparison with HTTP</strong></li>
                                                 <ul>
-                                                        <li>Each recipient has a mailbox in a mail server, which</li>
+                                                        <li>Pull vs push protocol</li>
                                                         <ul>
-                                                            <li>Manages and maintains the messages sent to the recipient</li>
+                                                            <li>HTTP is mainly a pull protocol (pulling uploaded information to a server)</li>
+                                                            <li>SMTP is primarily a push protocol</li>
                                                         </ul>
-                                                    <li>Authenticates recipients</li>
-                                                        <li>Deals with failure</li>
+                                                        <li>Encoding</li>
                                                         <ul>
-                                                            <li>Holds messages in a message queue and attempts (re)transmission until success</li>
+                                                            <li>SMTP requires each message to be encoded in 7-bit ASCII format, including non 7-bit ASCII (which is encoded and decoded appropriately)</li>
+                                                            <li>HTTP data does not impose this restriction</li>
+                                                        </ul>
+                                                        <li>Handling other media types</li>
+                                                        <ul>
+                                                            <li>HTTP encapsulates each object in its own HTTP response message</li>
+                                                            <li>SMTP places all of the message's objects into one message</li>
                                                         </ul>
                                                 </ul>
-                                                    <li id="2.3.1-smtp"><strong>2.3.1 SMTP</strong></li>
-                                                    <ul>
-                                                        <li>Transfer messages from senders' mail servers to the recipients' mail servers</li>
-                                                        <li>Everything encoded in 7-bit ASCII (old protocol, designed before people emailed large attachments)</li>
-                                                            <li>Common commands</li>
-                                                            <ul>
-                                                                <li>HELO</li>
-                                                                <li>MAIL FROM</li>
-                                                                <li>RCPT TO</li>
-                                                                <li>DATA</li>
-                                                                <li>QUIT</li>
-                                                            </ul>
-                                                        <li>Each command followed by CRLF</li>
-                                                        <li>Terminate DATA with CRLF.CRLF</li>
-                                                    </ul>
-                                                    <li id="2.3.2-comparison-with-http"><strong>2.3.2 Comparison with HTTP</strong></li>
-                                                    <ul>
-                                                            <li>Pull vs push protocol</li>
-                                                            <ul>
-                                                                <li>HTTP is mainly a pull protocol (pulling uploaded information to a server)</li>
-                                                                <li>SMTP is primarily a push protocol</li>
-                                                            </ul>
-                                                            <li>Encoding</li>
-                                                            <ul>
-                                                                <li>SMTP requires each message to be encoded in 7-bit ASCII format, including non 7-bit ASCII (which is encoded and decoded appropriately)</li>
-                                                                <li>HTTP data does not impose this restriction</li>
-                                                            </ul>
-                                                            <li>Handling other media types</li>
-                                                            <ul>
-                                                                <li>HTTP encapsulates each object in its own HTTP response message</li>
-                                                                <li>SMTP places all of the message's objects into one message</li>
-                                                            </ul>
-                                                    </ul>
-                                                    <li id="2.3.3-mail-message-formats"><strong>2.3.3 Mail Message Formats</strong></li>
-                                                    <ul>
-                                                            <li>Message header</li>
-                                                            <ul>
-                                                                <li>From:</li>
-                                                                <li>To:</li>
-                                                                <li>Subject:</li>
-                                                            </ul>
-                                                        <li>Blank line after message header, then body</li>
-                                                    </ul>
-                                                    <li id="2.3.4-mail-access-protocols"><strong>2.3.4 Mail Access Protocols</strong></li>
-                                                    <ul>
-                                                        <li>Could have recipient's local PC run a mail server, to create more direct communication, but recipient's PC would have to be always on and connected to the Internet</li>
-                                                        <li>Easier to have the recipient's local PC run a user agent program which pulls from the appropriate mailbox in the appropriate mail server (via a mail access protocol)</li>
-                                                            <li>Post Office Protocol — Version 3 (POP3)</li>
-                                                            <ul>
-                                                                <li>Simplistic — does not carry state information across POP3 sessions</li>
-                                                                <li>Does not provide any means for a user to maintain a folder hierarchy on a remote server that can be accessed from any computer</li>
-                                                            </ul>
-                                                            <li>Internet Mail Access Protocol (IMAP)</li>
-                                                            <ul>
-                                                                <li>Each message associated with a folder</li>
-                                                                <li>Maintains user state information across IMAP sessions</li>
-                                                            </ul>
-                                                        <li>HTTP</li>
-                                                    </ul>
+                                                <li id="2.3.3-mail-message-formats"><strong>2.3.3 Mail Message Formats</strong></li>
+                                                <ul>
+                                                        <li>Message header</li>
+                                                        <ul>
+                                                            <li>From:</li>
+                                                            <li>To:</li>
+                                                            <li>Subject:</li>
+                                                        </ul>
+                                                    <li>Blank line after message header, then body</li>
+                                                </ul>
+                                                <li id="2.3.4-mail-access-protocols"><strong>2.3.4 Mail Access Protocols</strong></li>
+                                                <ul>
+                                                    <li>Could have recipient's local PC run a mail server, to create more direct communication, but recipient's PC would have to be always on and connected to the Internet</li>
+                                                    <li>Easier to have the recipient's local PC run a user agent program which pulls from the appropriate mailbox in the appropriate mail server (via a mail access protocol)</li>
+                                                        <li>Post Office Protocol — Version 3 (POP3)</li>
+                                                        <ul>
+                                                            <li>Simplistic — does not carry state information across POP3 sessions</li>
+                                                            <li>Does not provide any means for a user to maintain a folder hierarchy on a remote server that can be accessed from any computer</li>
+                                                        </ul>
+                                                        <li>Internet Mail Access Protocol (IMAP)</li>
+                                                        <ul>
+                                                            <li>Each message associated with a folder</li>
+                                                            <li>Maintains user state information across IMAP sessions</li>
+                                                        </ul>
+                                                    <li>HTTP</li>
+                                                </ul>
                                             </ul>
-                                            <br>
-                                            <h4 id="2.4-dns-the-internets-directory-service">2.4 — DNS — The Internet's Directory Service</h4>
+                                        </ul>
+                                        <br>
+                                        <h4 id="2.4-dns-the-internets-directory-service">2.4 — DNS — The Internet's Directory Service</h4>
                                             <ul>
                                                     <li id="2.4.1-services-provided-by-dns"><strong>2.4.1 Services Provided by DNS</strong></li>
                                                     <ul>
