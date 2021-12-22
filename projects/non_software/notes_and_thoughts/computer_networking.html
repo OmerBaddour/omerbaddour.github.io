@@ -91,7 +91,7 @@
                                                                     <li><a href="#2.1.5-application-layer-protocols">2.1.5 Application-Layer Protocols</a></li>
                                                                     <li><a href="#2.1.6-network-applications-covered-in-this-book">2.1.6 Network Applications Covered in This Book</a></li>
                                                                 </ul>
-                                                            <li><a href="#2.2-the-web-and-hypertext-transfer-protocol-http">2.2 — The Web and HyperText Transfer Protocol (HTTP)</a></li>
+                                                            <li><a href="#2.2-the-web-and-hypertext-transfer-protocol">2.2 — The Web and HyperText Transfer Protocol (HTTP)</a></li>
                                                                 <ul>
                                                                     <li><a href="#2.2.1-overview-of-http">2.2.1 Overview of HTTP</a></li>
                                                                     <li><a href="#2.2.2-non-persistent-and-persistent-connections">2.2.2 Non-Persistent and Persistent Connections</a></li>
@@ -116,8 +116,8 @@
                                                             <li><a href="#2.6-video-streaming-and-content-delivery-networks">2.6 — Video Streaming and Content Delivery Networks</a></li>
                                                                 <ul>
                                                                     <li><a href="#2.6.1-internet-video">2.6.1 Internet Video</a></li>
-                                                                    <li><a href="#2.6.2-http-streaming-and-dynamic-adaptive-streaming-over-http-(dash)">2.6.2 HTTP Streaming and Dynamic Adaptive Streaming over HTTP (DASH)</a></li>
-                                                                    <li><a href="#2.6.3-content-distribution-networks-(cdns)">2.6.3 Content Distribution Networks (CDNs)</a></li>
+                                                                    <li><a href="#2.6.2-http-streaming-and-dynamic-adaptive-streaming-over-http">2.6.2 HTTP Streaming and Dynamic Adaptive Streaming over HTTP (DASH)</a></li>
+                                                                    <li><a href="#2.6.3-content-distribution-networks">2.6.3 Content Distribution Networks (CDNs)</a></li>
                                                                     <li><a href="#2.6.4-case-studies:-netflix,-youtube,-and-kankan">2.6.4 Case Studies: Netflix, YouTube, and KanKan</a></li>
                                                                 </ul>
                                                             <li><a href="#2.7 — Socket Programming">2.7 — Socket Programming</a></li>
@@ -163,7 +163,7 @@
                                                             <li><a href="#3.7-tcp-congestion-control">3.7 — TCP Congestion Control</a></li>
                                                                 <ul>
                                                                     <li><a href="#3.7.1-fairness">3.7.1 Fairness</a></li>
-                                                                    <li><a href="#3.7.2-explicit-congestion-notification-(ecn)-network-assisted-congestion-control">3.7.2 Explicit Congestion Notification (ECN): Network-assisted Congestion Control</a></li>
+                                                                    <li><a href="#3.7.2-explicit-congestion-notification-network-assisted-congestion-control">3.7.2 Explicit Congestion Notification (ECN): Network-assisted Congestion Control</a></li>
                                                                 </ul>
                                                         </ul>
                                                     <li><a href="#9-multimedia-networking">Chapter 9 — Multimedia Networking</a></li>
@@ -175,7 +175,7 @@
                                                                     <li><a href="#9.1.3-types-of-multimedia-network-applications">9.1.3 Types of Multimedia Network Applications</a></li>
                                                                 </ul>
                                                             <li><a href="#9.2-streaming-stored-video">9.2 — Streaming Stored Video</a></li>
-                                                            <li><a href="#9.3-voice-over-ip-internet-telephony-voip">9.3 — Voice-over-IP (internet telephony, VoIP)</a></li>
+                                                            <li><a href="#9.3-voice-over-ip">9.3 — Voice-over-IP (internet telephony, VoIP)</a></li>
                                                                 <ul>
                                                                     <li><a href="#9.3.1-limitations-of-the-best-effort-ip-service">9.3.1 Limitations of the Best-Effort IP Service</a></li>
                                                                     <li><a href="#9.3.2-removing-jitter-at-the-receiver-for-audio">9.3.2 Removing Jitter at the Receiver for Audio</a></li>
@@ -184,15 +184,15 @@
                                                                 </ul>
                                                             <li><a href="#9.4-protocols-for-real-time-conversational-applications">9.4 — Protocols for Real-Time Conversational Applications</a></li>
                                                                 <ul>
-                                                                    <li><a href="#9.4.1-real-time-transfer-protocol-(rtp)">9.4.1 Real-Time Transfer Protocol (RTP)</a></li>
-                                                                    <li><a href="#9.4.2-session-initiation-protocol-(sip)">9.4.2 Session Initiation Protocol (SIP) </a></li>
+                                                                    <li><a href="#9.4.1-real-time-transfer-protocol">9.4.1 Real-Time Transfer Protocol (RTP)</a></li>
+                                                                    <li><a href="#9.4.2-session-initiation-protocol">9.4.2 Session Initiation Protocol (SIP) </a></li>
                                                                 </ul>
                                                             <li><a href="#9.5-network-support-for-multimedia">9.5 — Network Support for Multimedia</a></li>
                                                                 <ul>
                                                                     <li><a href="#9.5.1-dimensioning-best-effort-networks">9.5.1 Dimensioning Best-Effort Networks</a></li>
                                                                     <li><a href="#9.5.2-providing-multiple-classes-of-service">9.5.2 Providing Multiple Classes of Service</a></li>
                                                                     <li><a href="#9.5.3-diffserv">9.5.3 Diffserv</a></li>
-                                                                    <li><a href="#9.5.4-per-connection-quality-of-service-(qos)-guarantees-resource-reservation-and-call-admission">9.5.4 Per-Connection Quality-of-Service (QoS) Guarantees: Resource Reservation and Call Admission</a></li>
+                                                                    <li><a href="#9.5.4-per-connection-quality-of-service-guarantees-resource-reservation-and-call-admission">9.5.4 Per-Connection Quality-of-Service (QoS) Guarantees: Resource Reservation and Call Admission</a></li>
                                                                 </ul>
                                                         </ul>
                                                 </ul>
@@ -203,9 +203,8 @@
                                     <h2 id="overall-thoughts">Overall Thoughts</h2>
                                     <p>I had a lot of fun reading this book. Learning about dozens of protocols in full detail paints a vivid picture of how the Internet actually works. Tangents about real-world applications, system design and Internet history provide nice motivation, and help you engage with the material by making you wonder. The end-of-chapter interviews with networks legends were always fun to read. There are countless references to a broad range of relevant and interesting external materials — from must-know software tools to foundational research papers.</p>
                                     <p>It is very readable for someone with an academic computer science background, and probably readable by someone with some general computer science familiarity who is willing to do their fair share of Googling.</p>
-                                    <p>A lot of information is covered at a great pace and depth. The first five chapters teach core networks concepts; chapters 6 to 9 are a fun way to test and expand upon your core networks knowledge.</p>
-                                    <p>I should note that before reading this book in full, I had already taken a computer networks class in college which heavily referenced this book. Thus, I was familiar with most of the concepts ahead of time.</p>
-                                    <p>Note: I did not take notes for chapters 4, 5, 6, 7 or 8. If enough people want me to badly enough, I can be convinced, but otherwise this is very low on my to-do list.</p>
+                                    <p>A lot of information is covered at a great pace and depth. The first five chapters teach core networks concepts; chapters 6 to 9 are advanced topics — a fun way to test and expand upon your core networks knowledge.</p>
+                                    <p>I should note that before reading this book in full, I had already taken a computer networks class in college which heavily referenced this book. Thus, I was familiar with most of the concepts ahead of time. Additionally, I did not take notes for chapters 4, 5, 6, 7 or 8. If enough people want me to badly enough, I can be convinced, but otherwise this is very low on my to-do list.</p>
 
                                     <hr class="major" />
                                     <h2 id="notes">Notes</h2>
@@ -797,7 +796,7 @@
                                                     </ul>
                                             </ul>
                                             <br>
-                                        <h4 id="2.2-the-web-and-hypertext-transfer-protocol-http">2.2 — The Web and HyperText Transfer Protocol (HTTP)</h4>
+                                        <h4 id="2.2-the-web-and-hypertext-transfer-protocol">2.2 — The Web and HyperText Transfer Protocol (HTTP)</h4>
                                             <ul>
                                                 <li id="2.2.1-overview-of-http"><strong>2.2.1 Overview of HTTP</strong></li>
                                                 <li><img class="image" src="/images/computer_networking/2_2_overview_of_http.png" alt="Overview of HTTP" width="40%"/></li>
@@ -1168,7 +1167,7 @@
                                                                 <li>For continuous playout, the network must provide an average throughput to the streaming application that is at least as large as the bit rate of the compressed video</li>
                                                             </ul>
                                                     </ul>
-                                                    <li id="2.6.2-http-streaming-and-dynamic-adaptive-streaming-over-http-(dash)"><strong>2.6.2 HTTP Streaming and Dynamic Adaptive Streaming over HTTP (DASH)</strong></li>
+                                                    <li id="2.6.2-http-streaming-and-dynamic-adaptive-streaming-over-http"><strong>2.6.2 HTTP Streaming and Dynamic Adaptive Streaming over HTTP (DASH)</strong></li>
                                                     <ul>
                                                         <li>Video encoded into several different versions, each with a different bit rate and, correspondingly, a different quality level</li>
                                                             <li>Allows clients to select different quality chunks based on perceived bandwidth</li>
@@ -1180,7 +1179,7 @@
                                                                 <li>Client selects one chunk at a time by specifying a URL and a byte range in an HTTP GET request message</li>
                                                             </ul>
                                                     </ul>
-                                                    <li id="2.6.3-content-distribution-networks-(cdns)"><strong>2.6.3 Content Distribution Networks (CDNs)</strong></li>
+                                                    <li id="2.6.3-content-distribution-networks"><strong>2.6.3 Content Distribution Networks (CDNs)</strong></li>
                                                     <ul>
                                                         <li>Manage servers in multiple geographically distributed locations</li>
                                                         <li>Stores copies of the videos in its servers</li>
@@ -1766,10 +1765,10 @@
                                                             <li>TCP's congestion control mechanism incentivizes high bandwidth applications to run over UDP</li>
                                                             <li>Can use multiple TCP connections in parallel to grab more bandwidth</li>
                                                         </ul>
-                                                        <li id="3.7.2-explicit-congestion-notification-(ecn)-network-assisted-congestion-control"><strong>3.7.2 Explicit Congestion Notification (ECN): Network-assisted Congestion Control</strong></li>
+                                                        <li id="3.7.2-explicit-congestion-notification-network-assisted-congestion-control"><strong>3.7.2 Explicit Congestion Notification (ECN): Network-assisted Congestion Control</strong></li>
                                                         <li><img class="image" src="/images/computer_networking/3_7_ecn.png" alt="Explicit Congestion Notification: network-assisted congestion control" width="40%"/></li>
                                                         <ul>
-                                                            <li>ECN Echo bit = 1 should cause TCP sender to half cwnd</li>
+                                                            <li>ECN Echo bit = 1 should cause TCP sender to half \(cwnd\)</li>
                                                         </ul>
                                                 </ul>
                                                 <br>
@@ -1888,7 +1887,7 @@
                                                         </ul>
                                                 </ul>
                                                 <br>
-                                                    <h4 id="9.3-voice-over-ip-internet-telephony-voip">9.3 — Voice-over-IP (internet telephony, VoIP)</h4>
+                                                    <h4 id="9.3-voice-over-ip">9.3 — Voice-over-IP (internet telephony, VoIP)</h4>
                                                 <ul>
                                                         <li id="9.3.1-limitations-of-the-best-effort-ip-service"><strong>9.3.1 Limitations of the Best-Effort IP Service</strong></li>
                                                         <ul>
@@ -1983,7 +1982,7 @@
                                                 <br>
                                                     <h4 id="9.4-protocols-for-real-time-conversational-applications">9.4 — Protocols for Real-Time Conversational Applications</h4>
                                                 <ul>
-                                                        <li id="9.4.1-real-time-transfer-protocol-(rtp)"><strong>9.4.1 Real-Time Transfer Protocol (RTP)</strong></li>
+                                                        <li id="9.4.1-real-time-transfer-protocol"><strong>9.4.1 Real-Time Transfer Protocol (RTP)</strong></li>
                                                         <ul>
                                                             <li>Runs on top of UDP</li>
                                                                 <li><img class="image" src="/images/computer_networking/9_4_rtp.png" alt="RTP header fields" width="40%"/></li>
@@ -1993,7 +1992,7 @@
                                                                 </ul>
                                                             <li>No insurance of timely delivery of data, or other quality-of-service (QoS) guarantees</li>
                                                         </ul>
-                                                        <li id="9.4.2-session-initiation-protocol-(sip)"><strong>9.4.2 Session Initiation Protocol (SIP)</strong></li>
+                                                        <li id="9.4.2-session-initiation-protocol"><strong>9.4.2 Session Initiation Protocol (SIP)</strong></li>
                                                         <li><img class="image" src="/images/computer_networking/9_4_sip_1.png" alt="SIP" width="40%"/></li>
                                                         <li><img class="image" src="/images/computer_networking/9_4_sip_2.png" alt="SIP" width="40%"/></li>
                                                         <ul>
@@ -2083,7 +2082,7 @@
                                                     <li>Expedited forwarding PHB specifies that the departure rate of a class of traffic must equal or exceed a configured rate</li>
                                                     <li>Assured forwarding PHB divides traffic into four classes, where each class is guaranteed with some minimum amount of bandwidth and buffering</li>
                                                 </ul>
-                                                <li id="9.5.4-per-connection-quality-of-service-(qos)-guarantees-resource-reservation-and-call-admission"><strong>9.5.4 Per-Connection Quality-of-Service (QoS) Guarantees: Resource Reservation and Call Admission</strong></li>
+                                                <li id="9.5.4-per-connection-quality-of-service-guarantees-resource-reservation-and-call-admission"><strong>9.5.4 Per-Connection Quality-of-Service (QoS) Guarantees: Resource Reservation and Call Admission</strong></li>
                                                 <ul>
                                                 <li>For a network to make guarantees, it must integrate call admission</li>
                                                 <li>A flow must declare its QoS requirement, and have the network either accept the flow (at the required QoS) or block the flow</li>
