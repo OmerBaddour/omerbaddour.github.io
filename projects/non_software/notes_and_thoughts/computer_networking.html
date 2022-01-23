@@ -37,6 +37,7 @@
                                     <h2>Table of Contents</h2>
 										<ul>
                                             <li><a href="#overall-thoughts">Overall Thoughts</a></li>
+                                            <li><a href="#high-level-summary">High-Level Summary</a></li>
 											<li><a href="#notes">Notes</a></li>
                                                 <ul>
                                                     <li><a href="#1-computer-networks-and-the-internet">Chapter 1 — Computer Networks and the Internet</a></li>
@@ -205,6 +206,32 @@
                                     <p>It is very readable for someone with an academic computer science background, and probably readable by someone with some general computer science familiarity who is willing to do their fair share of Googling.</p>
                                     <p>A lot of information is covered at a great pace and depth. The first five chapters teach core networks concepts; chapters 6 to 9 are advanced topics — a fun way to test and expand upon your core networks knowledge.</p>
                                     <p>I should note that before reading this book in full, I had already taken a computer networks class in college which heavily referenced this book. Thus, I was familiar with most of the concepts ahead of time. Additionally, I did not take notes for chapters 4, 5, 6, 7 or 8. If enough people want me to badly enough, I can be convinced, but otherwise this is very low on my to-do list.</p>
+
+                                    <hr class="major" />
+                                    <h2 id="high-level-summary">High-Level Summary</h2>
+                                    <p>Computer networks are formed via interconnected protocol-executing machines. The protocols are established by large communities and are documented in RFCs. There are several important characteristics of protocols:</p>
+                                        <ul>
+                                            <li>Packet structure and length</li>
+                                            <li>Initiation and termination</li>
+                                            <li>Error detection and correction</li>
+                                            <li>Reliability</li>
+                                            <li>Security</li>
+                                        </ul><br>
+                                    <p>Combinations of protocols can be used to aggregate properties — the OSI model defines general protocol paradigms. Protocols tend to be modelled with state machines.</p>
+                                    <p>The Internet consists of end-users and routers, that identify and find each other via IP addresses, DNS, and routing tables.</p>
+                                    <p>Many Internet resources need to be managed:</p>
+                                        <ul>
+                                            <li>IP address space</li>
+                                            <li>DNS and routing table entries</li>
+                                            <li>Throughput</li>
+                                                <ul>
+                                                    <li>Multiplexing</li>
+                                                    <li>Congestion control</li>
+                                                </ul>
+                                        </ul><br>
+                                    <p>General architectures have been created for high-throughput services, such as content delivery networks and data centers.<p>
+                                    <p>Several Internet utility programs exist, such as traceroute, ping, and nslookup.</p>
+                                    <p>The economics of the Internet is a function of end-users paying competing Internet Service Providers (ISPs), and ISPs paying competing Autonomous Systems (ASs).</p>
 
                                     <hr class="major" />
                                     <h2 id="notes">Notes</h2>
