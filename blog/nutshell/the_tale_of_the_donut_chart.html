@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>The Tale of the Donut Chart</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div data-include="/components/header"></div>
+
+							<!-- Content -->
+								<section>
+                                    <header class="main">
+										<h1>The Tale of the Donut Chart</h1>
+									</header>
+
+									<span class="image main"><img src="/images/donuts.jpg" alt="Donuts" /></span>
+
+                                    <ul class="actions">
+										<li><a href="/blog/nutshell/the_tale_of_the_donut_chart.html" class="button icon solid fa-seedling">Nutshell</a></li>
+										<li><a href="/blog/technical/the_tale_of_the_donut_chart.html" class="button primary icon solid fa-cog">Technical</a></li>
+									</ul>
+
+                                    <hr class="major" />
+                                    <h2>Table of Contents</h2>
+                                    <ul>
+                                        <li><a href="#the-tale">The Tale</a></li>
+                                        <li><a href="#the-takeaways">The Takeaways</a></li>
+                                        <li><a href="#sources">Sources</a></li>
+                                    </ul>
+
+                                    <hr class="major" />
+                                    <h2 id="the-tale">The Tale</h2>
+                                    <p>One day, I found myself needing to embed a <a href="https://en.wikipedia.org/wiki/Pie_chart#Doughnut_chart">donut chart</a> on a web page. The different sections of the chart were to resemble percentages. By default, the <a href="https://apexcharts.com/">chart library</a> displays percentages to one decimal place (e.g. 12.3%), which I didn't want, as the decimals added clutter.</p>
+                                    <p>Simple enough, I thought, before rounding the inputs to the nearest percentage.</p>
+                                    <p>Until I noticed a little detail &mdash; the rounded percentages don't always add up to 100 (e.g. [33.3%, 33.3%, 33.3%]).</p>
+                                    <p>I'm sure there's a simple solution, I thought, while Googling the problem, only to find <a href="https://stackoverflow.com/questions/13483430/how-to-make-rounded-percentages-add-up-to-100">a lovely list of complicated processes</a>. After floating through the endless stream of solutions, I decided to go with the <a href="https://en.wikipedia.org/wiki/Largest_remainder_method">largest remainder method</a>, which is the name of several related approaches used to "allocat[e] seats proportionally for representative assemblies with party list voting systems". Groovy.</p>
+                                    <p>With a little Googling I couldn't find someone else's code that I wanted to use. It was time to implement the <a href="https://en.wikipedia.org/wiki/Largest_remainder_method#Hare_quota">largest remainder method with the Hare quota</a>. This is a <em>good</em> idea &mdash; it's used for legislative elections in Russia, Ukraine, Lithuania, Tunisia, etc.</p>
+                                    <p>A little while later, I had the <em>perfect</em> donut chart.</p>
+                                    
+                                    <hr class="major" />
+                                    <h2 id="the-takeaways">The Takeaways</h2>
+                                    <ul>
+                                        <li>Never assume you know the true complexity of a task (see <a href="https://en.wikipedia.org/wiki/Planning_fallacy">planning fallacy</a>)</li>
+                                        <li>Never assume you can accurately estimate the time it will take to complete a task (see <a href="https://en.wikipedia.org/wiki/Hofstadter%27s_law">Hofstadter's Law</a>)</li>
+                                        <li>Donut charts can lead you to deep philosophical questions of error and fairness, and inparticular can lead you to voting systems</li>
+                                    </ul>
+									
+                                    <hr class="major" />
+									<h2 id="sources">Sources</h2>
+										<p><strong>Main image</strong>: By <a href="https://unsplash.com/@__elisa__">Elisa Kerschbaumer</a>, hosted by <a href="https://unsplash.com/photos/930meLGrSEg">Unsplash</a>, <a href="https://unsplash.com/license">license</a></p>
+                                        <strong>The Tale</strong>
+                                        <ul>
+                                            <li><a href="https://en.wikipedia.org/wiki/Pie_chart#Doughnut_chart">Donut chart</a></li>
+                                            <li><a href="https://apexcharts.com/">Chart library</a></li>
+                                            <li><a href="https://stackoverflow.com/questions/13483430/how-to-make-rounded-percentages-add-up-to-100">Stack Overflow solutions to making rounded percentages sum to 100</a></li>
+                                            <li><a href="https://en.wikipedia.org/wiki/Largest_remainder_method">Largest remainder method</a></li>
+                                            <li><a href="https://en.wikipedia.org/wiki/Largest_remainder_method#Hare_quota">Largest remainder method with Hare quota</a></li>
+                                        </ul>
+                                        <br>
+                                        <strong>The Takeaways</strong>
+                                        <ul>
+                                            <li><a href="https://en.wikipedia.org/wiki/Planning_fallacy">Planning fallacy</a></li>
+                                            <li><a href="https://en.wikipedia.org/wiki/Hofstadter%27s_law">Hofstadter's Law</a></li>
+                                        </ul>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<div data-include="/components/sidebar"></div>
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+			<script id="MathJax-script" async="false" src="/assets/mathjax/tex-chtml.js"></script>
+			<script>
+			$(function () {  /* include other HTML files */
+				var includes = $('[data-include]')
+				$.each(includes, function () {
+					var file = $(this).data('include') + '.html'
+					$(this).load(file)
+				})
+			})
+			</script>
+
+	</body>
+</html>
